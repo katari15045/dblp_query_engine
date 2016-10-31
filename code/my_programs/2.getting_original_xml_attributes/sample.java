@@ -21,6 +21,7 @@ public class sample
 
 class MyDefaultHandler extends DefaultHandler
 {
+	boolean b_article=false;
 	boolean b_author=false;
 	boolean b_title=false;
 	boolean b_pages=false;
@@ -43,7 +44,6 @@ class MyDefaultHandler extends DefaultHandler
 		else if(q_name.equalsIgnoreCase("title"))
 		{
 			b_title = true;
-			count_entities = count_entities + 1;
 		}
 
 		else if(q_name.equalsIgnoreCase("pages"))
@@ -79,6 +79,11 @@ class MyDefaultHandler extends DefaultHandler
 		else if(q_name.equalsIgnoreCase("ee"))
 		{
 			b_ee = true;
+		}
+
+		else if(q_name.equalsIgnoreCase("article"))
+		{
+			b_article = true;
 		}
 	}
 
@@ -137,6 +142,12 @@ class MyDefaultHandler extends DefaultHandler
 			//System.out.println("ee : " + new String(ch,start,length));
 			b_ee = false;
 			//System.out.println("--------------------");
+		}
+
+		else if(b_article)
+		{
+			b_article = false;
+			count_entities = count_entities + 1;
 		}
 	}
 
