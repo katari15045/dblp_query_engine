@@ -4,6 +4,12 @@ import org.xml.sax.*;
 
 public class sample
 {
+
+	static
+	{
+		System.setProperty("jdk.xml.entityExpansionLimit", "0");
+	}
+
 	public static void main(String[] args) throws Exception
 	{
 		SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -25,6 +31,8 @@ class MyDefaultHandler extends DefaultHandler
 	boolean b_url=false;
 	boolean b_ee=false;
 
+	long count_entities=0;
+
 	public void startElement(String uri,String local_name,String q_name,Attributes attr) throws SAXException
 	{
 		if(q_name.equalsIgnoreCase("author"))
@@ -35,6 +43,7 @@ class MyDefaultHandler extends DefaultHandler
 		else if(q_name.equalsIgnoreCase("title"))
 		{
 			b_title = true;
+			count_entities = count_entities + 1;
 		}
 
 		else if(q_name.equalsIgnoreCase("pages"))
@@ -77,60 +86,62 @@ class MyDefaultHandler extends DefaultHandler
 	{
 		if(b_author)
 		{
-			System.out.println("Author : " + new String(ch,start,length));
+			//System.out.println("Author : " + new String(ch,start,length));
 			b_author = false;
 		}
 
 		else if(b_title)
 		{
-			System.out.println("Title : " + new String(ch,start,length));
+			//System.out.println("Title : " + new String(ch,start,length));
 			b_title = false;
 		}
 
 		else if(b_pages)
 		{
-			System.out.println("Pages : " + new String(ch,start,length));
+			//System.out.println("Pages : " + new String(ch,start,length));
 			b_pages = false;
 		}
 
 		else if(b_year)
 		{
-			System.out.println("Year : " + new String(ch,start,length));
+			//System.out.println("Year : " + new String(ch,start,length));
 			b_year = false;
 		}
 
 		else if(b_volume)
 		{
-			System.out.println("Volume : " + new String(ch,start,length));
+			//System.out.println("Volume : " + new String(ch,start,length));
 			b_volume = false;
 		}
 
 		else if(b_journal)
 		{
-			System.out.println("Journal : " + new String(ch,start,length));
+			//System.out.println("Journal : " + new String(ch,start,length));
 			b_journal = false;
 		}
 
 		else if(b_number)
 		{
-			System.out.println("Number : " + new String(ch,start,length));
+			//System.out.println("Number : " + new String(ch,start,length));
 			b_number = false;
 		}
 
 		else if(b_url)
 		{
-			System.out.println("URL : " + new String(ch,start,length));
+			//System.out.println("URL : " + new String(ch,start,length));
 			b_url = false;
 		}
 
 		else if(b_ee)
 		{
-			System.out.println("ee : " + new String(ch,start,length));
+			//System.out.println("ee : " + new String(ch,start,length));
 			b_ee = false;
-			System.out.println("--------------------");
+			//System.out.println("--------------------");
 		}
+	}
 
-
-
+	public void endDocument() throws SAXException
+	{
+		System.out.println("Entities : " + count_entities);
 	}
 }
