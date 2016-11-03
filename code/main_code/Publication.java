@@ -4,6 +4,7 @@ public class Publication
 {
 
 	private String[] author_array;
+	private int count_author;
 	private String title;
 	private String pages;
 	private int year;
@@ -27,6 +28,7 @@ public class Publication
 	private void initialize_author_array()
 	{
 		author_array = new String[99];
+		count_author = 0;
 		int count = 0;
 
 		while( count < 99 )
@@ -36,9 +38,10 @@ public class Publication
 		}
 	}
 
-	public void set_author(String inp_author,int inp_index)
+	public void set_author(String inp_author)
 	{
-		author_array[inp_index] = inp_author;
+		author_array[count_author] = inp_author;
+		count_author = count_author + 1;
 	}
 
 	public void set_title(String inp_title)
