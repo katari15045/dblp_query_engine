@@ -85,6 +85,7 @@ class MyDefaultHandler extends DefaultHandler
 		else if(q_name.equalsIgnoreCase("article"))
 		{
 			b_article = true;
+			count_entities = count_entities + 1;
 		}
 	}
 
@@ -148,7 +149,6 @@ class MyDefaultHandler extends DefaultHandler
 		else if(b_article)
 		{
 			b_article = false;
-			count_entities = count_entities + 1;
 		}
 	}
 
