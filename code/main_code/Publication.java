@@ -3,18 +3,7 @@
 public class Publication
 {
 
-	public Publication()
-	{
-		author = new String();
-		title = new String();
-		pages = new String();
-		volume = new String();
-		journal = new String();
-		url = new String();
-		ee = new String();
-	}
-
-	private String author;
+	private String[] author_array;
 	private String title;
 	private String pages;
 	private int year;
@@ -24,9 +13,32 @@ public class Publication
 	private String url;
 	private String ee;
 
-	public void set_author(String inp_author)
+	public Publication()
 	{
-		author = inp_author;
+		initialize_author_array();
+		title = new String();
+		pages = new String();
+		volume = new String();
+		journal = new String();
+		url = new String();
+		ee = new String();
+	}
+
+	private void initialize_author_array()
+	{
+		author_array = new String[99];
+		int count = 0;
+
+		while( count < 99 )
+		{
+			author_array[count] = new String();
+			count = count + 1;
+		}
+	}
+
+	public void set_author(String inp_author,int inp_index)
+	{
+		author_array[inp_index] = inp_author;
 	}
 
 	public void set_title(String inp_title)
@@ -69,9 +81,9 @@ public class Publication
 		ee = inp_ee;
 	}
 //-----------------------------------------------------------
-	public String get_author()
+	public String get_author(int inp_index)
 	{
-		return author;
+		return author_array[inp_index];
 	}
 
 	public String get_title()
