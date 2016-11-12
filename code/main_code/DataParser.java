@@ -95,7 +95,6 @@ class MyDefaultHandler extends DefaultHandler
 		{
 			//System.out.println("Author : " + new String(ch,start,length));
 			b_author = false;
-			//my_data_base.store_author( count_entities-1,new String(ch,start,length) );
 		}
 
 		else if(b_title)
