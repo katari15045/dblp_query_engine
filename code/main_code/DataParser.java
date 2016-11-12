@@ -12,7 +12,6 @@ public class DataParser
 
 	public static void main(String[] args) throws Exception
 	{
-		DataBase my_data_base = new DataBase();
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 		SAXParser sp = spf.newSAXParser();
 		MyDefaultHandler dh = new MyDefaultHandler();
@@ -33,7 +32,8 @@ class MyDefaultHandler extends DefaultHandler
 	boolean b_url=false;
 	boolean b_ee=false;
 
-	long count_entities=0;
+	int count_entities=0;
+	DataBase my_data_base = new DataBase();
 
 	public void startElement(String uri,String local_name,String q_name,Attributes attr) throws SAXException
 	{
@@ -95,6 +95,7 @@ class MyDefaultHandler extends DefaultHandler
 		{
 			//System.out.println("Author : " + new String(ch,start,length));
 			b_author = false;
+			//my_data_base.store_author( count_entities-1,new String(ch,start,length) );
 		}
 
 		else if(b_title)
