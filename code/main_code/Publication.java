@@ -37,54 +37,63 @@ public class Publication
 		sb.append(inp_author);
 		sb = null;
 		author_array.add(sb);
+		inp_author = null;
 	}
 
 	public void setTitle(char[] inp_title)
 	{
 		title.delete( 0,title.length() );
 		title.append(inp_title);
+		inp_title = null;
 	}
 
 	public void setPages(char[] inp_pages)
 	{
 		pages.delete( 0,pages.length() );
 		pages.append(inp_pages);
+		inp_pages = null;
 	}
 
 	public void setYear(char[] inp_year)
 	{
 		year.delete( 0,year.length() );
 		year.append(inp_year);
+		inp_year = null;
 	}
 
 	public void setVolume(char[] inp_volume)
 	{
 		volume.delete( 0,volume.length() );
 		volume.append(inp_volume);
+		inp_volume = null;
 	}
 
 	public void setJournal(char[] inp_journal)
 	{
 		journal.delete( 0,journal.length() );
 		journal.append(inp_journal);
+		inp_journal = null;
 	}
 
 	public void setNumber(char[] inp_number)
 	{
 		number.delete( 0,number.length() );
 		number.append(inp_number);
+		inp_number = null;
 	}
 
 	public void setURL(char[] inp_url)
 	{
 		url.delete( 0,url.length() );
 		url.append(inp_url);
+		inp_url = null;
 	}
 
 	public void setEE(char[] inp_ee)
 	{
 		ee.delete( 0,ee.length() );
 		ee.append(inp_ee);
+		inp_ee = null;
 	}
 //-----------------------------------------------------------
 

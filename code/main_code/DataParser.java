@@ -109,6 +109,11 @@ class MyDefaultHandler extends DefaultHandler
 			b_article = true;
 			count_entities = count_entities + 1;
 		}
+
+		uri = null;
+		local_name = null;
+		q_name = null;
+		attr = null;
 	}
 
 	public void characters(char ch[],int start,int length) throws SAXException
@@ -173,6 +178,8 @@ class MyDefaultHandler extends DefaultHandler
 			b_article = false;
 			my_publication.clearAuthorArray();
 		}
+
+		ch = null;
 
 	}
 
