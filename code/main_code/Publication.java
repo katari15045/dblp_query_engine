@@ -84,30 +84,45 @@ public class Publication
 	}
 //-----------------------------------------------------------
 
-/*
-	public boolean doesAuthorExists(StringBuilder inp_author_name)
+
+	public boolean doesAuthorExist(char[] inp_author)
 	{
-		Iterator<StringBuilder> iter = author_array.iterator();
+		boolean to_return = false;
+		StringBuilder inp_author_sb = new StringBuilder();
+		inp_author_sb.append(inp_author);
+		String inp_author_name = inp_author_sb.toString();
+		Iterator iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{
-			StringBuilder my_author_name = iter.next();
+			String my_author_name = iter.next().toString();		// Authors in this Publication
 
-			for( StringBuilder first_string: inp_author_name.split(" ") )
+			for( String first_string: inp_author_name.split(" ") )
 			{
-				for( StringBuilder second_string: my_author_name.split(" ") )
+				for( String second_string: my_author_name.split(" ") )
 				{
 					if( first_string.equalsIgnoreCase(second_string) )
 					{
-						return true;
+						to_return = true;
 					}
+
+					second_string = null;
 				}
+
+				first_string = null;
 			}
+
+			my_author_name = null;
 		}
 
-		return false;
+		inp_author = null;
+		inp_author_sb = null;
+		inp_author_name = null;
+		iter = null;
+
+		return to_return;
 	}
-*/
+
 	public StringBuilder getTitle()
 	{
 		return title;
