@@ -10,17 +10,32 @@ public class DataParser
 		System.setProperty("jdk.xml.entityExpansionLimit", "0");
 	}
 
-	public static void main(String[] args) throws Exception
+	public static void main(String[] args)
 	{
-		SAXParserFactory spf = SAXParserFactory.newInstance();
-		SAXParser sp = spf.newSAXParser();
+		SAXParserFactory spf = null;
+		SAXParser sp = null;
 		MyDefaultHandler dh = new MyDefaultHandler();
-		sp.parse("dblp.xml",dh);
+
+		try
+		{
+			spf = SAXParserFactory.newInstance();
+			sp = spf.newSAXParser();
+			sp.parse("dblp.xml",dh);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
 	}
+
 }
 
 class MyDefaultHandler extends DefaultHandler
 {
+	Publication my_publication;
+	DataBase my_data_base;
+
 	boolean b_article=false;
 	boolean b_author=false;
 	boolean b_title=false;
@@ -33,7 +48,14 @@ class MyDefaultHandler extends DefaultHandler
 	boolean b_ee=false;
 
 	int count_entities=0;
-	DataBase my_data_base = new DataBase();
+	int year,number;
+	
+
+	public MyDefaultHandler()
+	{
+		my_publication = new Publication();
+		my_data_base = new DataBase();
+	}
 
 	public void startElement(String uri,String local_name,String q_name,Attributes attr) throws SAXException
 	{
@@ -93,54 +115,82 @@ class MyDefaultHandler extends DefaultHandler
 	{
 		if(b_author)
 		{
+			
+			my_publication.setAuthor( new String(ch,start,length) );
 			//System.out.println("Author : " + new String(ch,start,length));
 			b_author = false;
 		}
 
 		else if(b_title)
 		{
+			my_publication.setTitle( new String(ch,start,length) );
 			//System.out.println("Title : " + new String(ch,start,length));
 			b_title = false;
 		}
 
 		else if(b_pages)
 		{
+			my_publication.setPages( new String(ch,start,length) );
 			//System.out.println("Pages : " + new String(ch,start,length));
 			b_pages = false;
 		}
 
 		else if(b_year)
 		{
+			try
+			{	
+				year = Integer.parseInt( new String(ch,start,length) );
+			}
+			catch(Exception e)
+			{
+				System.out.println(e +  "----- Year ");
+			}
+			
+			my_publication.setYear(year);
 			//System.out.println("Year : " + new String(ch,start,length));
 			b_year = false;
 		}
 
 		else if(b_volume)
 		{
+			my_publication.setVolume( new String(ch,start,length) );
 			//System.out.println("Volume : " + new String(ch,start,length));
 			b_volume = false;
 		}
 
 		else if(b_journal)
 		{
+			my_publication.setJournal( new String(ch,start,length) );
 			//System.out.println("Journal : " + new String(ch,start,length));
 			b_journal = false;
 		}
 
 		else if(b_number)
 		{
+			try
+			{
+				//number = Integer.parseInt( new String(ch,start,length) );
+			}
+			catch(Exception e)
+			{
+				System.out.println(e + "------ Number");
+			}
+
+			//my_publication.setNumber(number);
 			//System.out.println("Number : " + new String(ch,start,length));
 			b_number = false;
 		}
 
 		else if(b_url)
 		{
+			my_publication.setURL( new String(ch,start,length) );
 			//System.out.println("URL : " + new String(ch,start,length));
 			b_url = false;
 		}
 
 		else if(b_ee)
 		{
+			my_publication.setEE( new String(ch,start,length) );
 			//System.out.println("ee : " + new String(ch,start,length));
 			b_ee = false;
 			//System.out.println("--------------------");
@@ -150,10 +200,20 @@ class MyDefaultHandler extends DefaultHandler
 		{
 			b_article = false;
 		}
+
 	}
 
 	public void endDocument() throws SAXException
 	{
 		System.out.println("Entities : " + count_entities);
 	}
+
+/*
+	public Publication getParsedPublication()
+	{
+
+	}
+
+*/
+
 }

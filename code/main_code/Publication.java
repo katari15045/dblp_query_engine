@@ -1,9 +1,9 @@
-
+import java.util.*;
 
 public class Publication
 {
 
-	private List<String> author_array;
+	private List author_array;
 	private String title;
 	private String pages;
 	private int year;
@@ -15,7 +15,7 @@ public class Publication
 
 	public Publication()
 	{
-		author_array = new LinkedList<String>;
+		author_array = new LinkedList<String>();
 		title = new String();
 		pages = new String();
 		volume = new String();
