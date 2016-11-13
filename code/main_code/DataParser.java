@@ -116,21 +116,21 @@ class MyDefaultHandler extends DefaultHandler
 		if(b_author)
 		{
 			
-			my_publication.setAuthor( new String(ch,start,length) );
+			my_publication.setAuthor(ch);
 			//System.out.println("Author : " + new String(ch,start,length));
 			b_author = false;
 		}
 
 		else if(b_title)
 		{
-			my_publication.setTitle( new String(ch,start,length) );
+			my_publication.setTitle(ch);
 			//System.out.println("Title : " + new String(ch,start,length));
 			b_title = false;
 		}
 
 		else if(b_pages)
 		{
-			my_publication.setPages( new String(ch,start,length) );
+			my_publication.setPages(ch);
 			//System.out.println("Pages : " + new String(ch,start,length));
 			b_pages = false;
 		}
@@ -139,28 +139,28 @@ class MyDefaultHandler extends DefaultHandler
 		{
 			try
 			{	
-				year = Integer.parseInt( new String(ch,start,length) );
+				//year = Integer.parseInt(ch);
 			}
 			catch(Exception e)
 			{
 				System.out.println(e +  "----- Year ");
 			}
 			
-			my_publication.setYear(year);
+			//my_publication.setYear(year);
 			//System.out.println("Year : " + new String(ch,start,length));
 			b_year = false;
 		}
 
 		else if(b_volume)
 		{
-			my_publication.setVolume( new String(ch,start,length) );
+			my_publication.setVolume(ch);
 			//System.out.println("Volume : " + new String(ch,start,length));
 			b_volume = false;
 		}
 
 		else if(b_journal)
 		{
-			my_publication.setJournal( new String(ch,start,length) );
+			my_publication.setJournal(ch);
 			//System.out.println("Journal : " + new String(ch,start,length));
 			b_journal = false;
 		}
@@ -183,14 +183,14 @@ class MyDefaultHandler extends DefaultHandler
 
 		else if(b_url)
 		{
-			my_publication.setURL( new String(ch,start,length) );
+			my_publication.setURL(ch);
 			//System.out.println("URL : " + new String(ch,start,length));
 			b_url = false;
 		}
 
 		else if(b_ee)
 		{
-			my_publication.setEE( new String(ch,start,length) );
+			my_publication.setEE(ch);
 			//System.out.println("ee : " + new String(ch,start,length));
 			b_ee = false;
 			//System.out.println("--------------------");
@@ -199,6 +199,7 @@ class MyDefaultHandler extends DefaultHandler
 		else if(b_article)
 		{
 			b_article = false;
+			my_publication.clearAuthorArray();
 		}
 
 	}

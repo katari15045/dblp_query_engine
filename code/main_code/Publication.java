@@ -3,40 +3,50 @@ import java.util.*;
 public class Publication
 {
 
-	private List author_array;
-	private String title;
-	private String pages;
+	private List<StringBuilder> author_array;
+	private StringBuilder title;
+	private StringBuilder pages;
 	private int year;
-	private String volume;
-	private String journal;
+	private StringBuilder volume;
+	private StringBuilder journal;
 	private int number;
-	private String url;
-	private String ee;
+	private StringBuilder url;
+	private StringBuilder ee;
 
 	public Publication()
 	{
-		author_array = new LinkedList<String>();
-		title = new String();
-		pages = new String();
-		volume = new String();
-		journal = new String();
-		url = new String();
-		ee = new String();
+		author_array = new LinkedList<StringBuilder>();
+		title = new StringBuilder();
+		pages = new StringBuilder();
+		volume = new StringBuilder();
+		journal = new StringBuilder();
+		url = new StringBuilder();
+		ee = new StringBuilder();
 	}
 
-	public void setAuthor(String inp_author)
+	public void clearAuthorArray()
 	{
-		author_array.add(inp_author);
+		author_array.clear();
 	}
 
-	public void setTitle(String inp_title)
+	public void setAuthor(char[] inp_author)
 	{
-		title = inp_title;
+		StringBuilder sb = new StringBuilder();
+		sb.append(inp_author);
+		sb = null;
+		author_array.add(sb);
 	}
 
-	public void setPages(String inp_pages)
+	public void setTitle(char[] inp_title)
 	{
-		pages = inp_pages;
+		title.delete( 0,title.length() );
+		title.append(inp_title);
+	}
+
+	public void setPages(char[] inp_pages)
+	{
+		pages.delete( 0,pages.length() );
+		pages.append(inp_pages);
 	}
 
 	public void setYear(int inp_year)
@@ -44,14 +54,16 @@ public class Publication
 		year = inp_year;
 	}
 
-	public void setVolume(String inp_volume)
+	public void setVolume(char[] inp_volume)
 	{
-		volume = inp_volume;
+		volume.delete( 0,volume.length() );
+		volume.append(inp_volume);
 	}
 
-	public void setJournal(String inp_journal)
+	public void setJournal(char[] inp_journal)
 	{
-		journal = inp_journal;
+		journal.delete( 0,journal.length() );
+		journal.append(inp_journal);
 	}
 
 	public void setNumber(int inp_number)
@@ -59,28 +71,31 @@ public class Publication
 		number = inp_number;
 	}
 
-	public void setURL(String inp_url)
+	public void setURL(char[] inp_url)
 	{
-		url = inp_url;
+		url.delete( 0,url.length() );
+		url.append(inp_url);
 	}
 
-	public void setEE(String inp_ee)
+	public void setEE(char[] inp_ee)
 	{
-		ee = inp_ee;
+		ee.delete( 0,ee.length() );
+		ee.append(inp_ee);
 	}
 //-----------------------------------------------------------
 
-	public boolean doesAuthorExists(String inp_author_name)
+/*
+	public boolean doesAuthorExists(StringBuilder inp_author_name)
 	{
-		Iterator<String> iter = author_array.iterator();
+		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{
-			String my_author_name = iter.next();
+			StringBuilder my_author_name = iter.next();
 
-			for( String first_string: inp_author_name.split(" ") )
+			for( StringBuilder first_string: inp_author_name.split(" ") )
 			{
-				for( String second_string: my_author_name.split(" ") )
+				for( StringBuilder second_string: my_author_name.split(" ") )
 				{
 					if( first_string.equalsIgnoreCase(second_string) )
 					{
@@ -92,13 +107,13 @@ public class Publication
 
 		return false;
 	}
-
-	public String getTitle()
+*/
+	public StringBuilder getTitle()
 	{
 		return title;
 	}
 
-	public String getPages()
+	public StringBuilder getPages()
 	{
 		return pages;
 	}
@@ -108,12 +123,12 @@ public class Publication
 		return year;
 	}
 
-	public String getVolume()
+	public StringBuilder getVolume()
 	{
 		return volume;
 	}
 
-	public String getJournal()
+	public StringBuilder getJournal()
 	{
 		return journal;
 	}
@@ -123,12 +138,12 @@ public class Publication
 		return number;
 	}
 
-	public String getURL()
+	public StringBuilder getURL()
 	{
 		return url;
 	}
 
-	public String getEE()
+	public StringBuilder getEE()
 	{
 		return ee;
 	}
