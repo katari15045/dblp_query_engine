@@ -117,83 +117,55 @@ class MyDefaultHandler extends DefaultHandler
 		{
 			
 			my_publication.setAuthor(ch);
-			//System.out.println("Author : " + new String(ch,start,length));
 			b_author = false;
 		}
 
 		else if(b_title)
 		{
 			my_publication.setTitle(ch);
-			//System.out.println("Title : " + new String(ch,start,length));
 			b_title = false;
 		}
 
 		else if(b_pages)
 		{
 			my_publication.setPages(ch);
-			//System.out.println("Pages : " + new String(ch,start,length));
 			b_pages = false;
 		}
 
 		else if(b_year)
 		{
-			try
-			{	
-				//year = Integer.parseInt(ch);
-			}
-			catch(Exception e)
-			{
-				System.out.println(e +  "----- Year ");
-			}
-			
-			//my_publication.setYear(year);
-			//System.out.println("Year : " + new String(ch,start,length));
+			my_publication.setYear(ch);
 			b_year = false;
 		}
 
 		else if(b_volume)
 		{
 			my_publication.setVolume(ch);
-			//System.out.println("Volume : " + new String(ch,start,length));
 			b_volume = false;
 		}
 
 		else if(b_journal)
 		{
 			my_publication.setJournal(ch);
-			//System.out.println("Journal : " + new String(ch,start,length));
 			b_journal = false;
 		}
 
 		else if(b_number)
 		{
-			try
-			{
-				//number = Integer.parseInt( new String(ch,start,length) );
-			}
-			catch(Exception e)
-			{
-				System.out.println(e + "------ Number");
-			}
-
-			//my_publication.setNumber(number);
-			//System.out.println("Number : " + new String(ch,start,length));
+			my_publication.setNumber(ch);
 			b_number = false;
 		}
 
 		else if(b_url)
 		{
 			my_publication.setURL(ch);
-			//System.out.println("URL : " + new String(ch,start,length));
 			b_url = false;
 		}
 
 		else if(b_ee)
 		{
 			my_publication.setEE(ch);
-			//System.out.println("ee : " + new String(ch,start,length));
 			b_ee = false;
-			//System.out.println("--------------------");
 		}
 
 		else if(b_article)

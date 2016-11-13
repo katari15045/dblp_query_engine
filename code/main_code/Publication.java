@@ -6,10 +6,10 @@ public class Publication
 	private List<StringBuilder> author_array;
 	private StringBuilder title;
 	private StringBuilder pages;
-	private int year;
+	private StringBuilder year;
 	private StringBuilder volume;
 	private StringBuilder journal;
-	private int number;
+	private StringBuilder number;
 	private StringBuilder url;
 	private StringBuilder ee;
 
@@ -18,8 +18,10 @@ public class Publication
 		author_array = new LinkedList<StringBuilder>();
 		title = new StringBuilder();
 		pages = new StringBuilder();
+		year = new StringBuilder();
 		volume = new StringBuilder();
 		journal = new StringBuilder();
+		number = new StringBuilder();
 		url = new StringBuilder();
 		ee = new StringBuilder();
 	}
@@ -49,9 +51,10 @@ public class Publication
 		pages.append(inp_pages);
 	}
 
-	public void setYear(int inp_year)
+	public void setYear(char[] inp_year)
 	{
-		year = inp_year;
+		year.delete( 0,year.length() );
+		year.append(inp_year);
 	}
 
 	public void setVolume(char[] inp_volume)
@@ -66,9 +69,10 @@ public class Publication
 		journal.append(inp_journal);
 	}
 
-	public void setNumber(int inp_number)
+	public void setNumber(char[] inp_number)
 	{
-		number = inp_number;
+		number.delete( 0,number.length() );
+		number.append(inp_number);
 	}
 
 	public void setURL(char[] inp_url)
@@ -133,7 +137,7 @@ public class Publication
 		return pages;
 	}
 
-	public int getYear()
+	public StringBuilder getYear()
 	{
 		return year;
 	}
@@ -148,7 +152,7 @@ public class Publication
 		return journal;
 	}
 
-	public int getNumber()
+	public StringBuilder getNumber()
 	{
 		return number;
 	}
