@@ -141,7 +141,7 @@ public class DataParser extends DefaultHandler
     {
         if( qName.equalsIgnoreCase("article") )
         {
-        	my_data_base.storeCurrentPublication(my_publication);
+        	my_data_base.storePublication(my_publication);
         	my_publication.clearAuthorArray();
 			count_entities = count_entities + 1;
         }

@@ -3,31 +3,25 @@ import java.util.*;
 
 public class DataBase
 {
+	protected static List<Publication> publication_list;
+	DataParser my_data_parser;
 
-	private static List<Publication> publication_list;
-	private static DataParser my_data_parser;
-
-	public DataBase()
+	public void storeData()
 	{
-		
-	}
-
-	public static void main(String[] args)
-	{
-		publication_list = new LinkedList<Publication>();
 		my_data_parser = new DataParser();
 		my_data_parser.startParsing();
 	}
 
-	public static void storeCurrentPublication(Publication inp_publication)
+	public void storePublication(Publication inp_publication)
 	{
+		publication_list = new LinkedList<Publication>();
 		Publication cloned_publication = (Publication) inp_publication.clone();
 		publication_list.add(cloned_publication);
 		cloned_publication = null;
 		inp_publication = null;	
 	}
 
-	public static List getPublicationList()
+	public List getPublicationList()
 	{
 		return publication_list;
 	}
