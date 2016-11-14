@@ -14,17 +14,7 @@ public class DataParser extends DefaultHandler
 	Publication my_publication;
 	DataBase my_data_base;
 	
-	boolean b_article=false;
-	boolean b_author=false;
-	boolean b_title=false;
-	boolean b_pages=false;
-	boolean b_year=false;
-	boolean b_volume=false;
-	boolean b_journal=false;
-	boolean b_number=false;
-	boolean b_url=false;
-	boolean b_ee=false;
-
+	boolean b_article,b_author,b_title,b_pages,b_year,b_volume,b_journal,b_number,b_url,b_ee;	// By Default Boolean variable is false
 	int count_entities=0;
 
 	public DataParser()
@@ -56,15 +46,15 @@ public class DataParser extends DefaultHandler
 
 	public void startElement(String uri,String local_name,String q_name,Attributes attr) throws SAXException
 	{
-		if(q_name.equalsIgnoreCase("author"))	b_author = true;
+		if(q_name.equalsIgnoreCase("author"))		b_author = true;
 		else if(q_name.equalsIgnoreCase("title"))	b_title = true;
 		else if(q_name.equalsIgnoreCase("pages"))	b_pages = true;
 		else if(q_name.equalsIgnoreCase("year"))	b_year = true;
 		else if(q_name.equalsIgnoreCase("volume"))	b_volume = true;
 		else if(q_name.equalsIgnoreCase("journal"))	b_journal = true;
 		else if(q_name.equalsIgnoreCase("number"))	b_number = true;
-		else if(q_name.equalsIgnoreCase("url"))	b_url = true;
-		else if(q_name.equalsIgnoreCase("ee"))	b_ee = true;
+		else if(q_name.equalsIgnoreCase("url"))		b_url = true;
+		else if(q_name.equalsIgnoreCase("ee"))		b_ee = true;
 		else if(q_name.equalsIgnoreCase("article"))	b_article = true;
 		
 		uri = null;
@@ -75,64 +65,16 @@ public class DataParser extends DefaultHandler
 
 	public void characters(char ch[],int start,int length) throws SAXException
 	{
-		if(b_author)
-		{
-			my_publication.setAuthor(ch);
-			b_author = false;
-		}
-
-		else if(b_title)
-		{
-			my_publication.setTitle(ch);
-			b_title = false;
-		}
-
-		else if(b_pages)
-		{
-			my_publication.setPages(ch);
-			b_pages = false;
-		}
-
-		else if(b_year)
-		{
-			my_publication.setYear(ch);
-			b_year = false;
-		}
-
-		else if(b_volume)
-		{
-			my_publication.setVolume(ch);
-			b_volume = false;
-		}
-
-		else if(b_journal)
-		{
-			my_publication.setJournal(ch);
-			b_journal = false;
-		}
-
-		else if(b_number)
-		{
-			my_publication.setNumber(ch);
-			b_number = false;
-		}
-
-		else if(b_url)
-		{
-			my_publication.setURL(ch);
-			b_url = false;
-		}
-
-		else if(b_ee)
-		{
-			my_publication.setEE(ch);
-			b_ee = false;
-		}
-
-		else if(b_article)
-		{
-			b_article = false;
-		}
+		if(b_author)		{	b_author = false;	my_publication.setAuthor(ch);	}
+		else if(b_title)	{	b_title = false;	my_publication.setTitle(ch);	}
+		else if(b_pages)	{	b_pages = false;	my_publication.setPages(ch);	}
+		else if(b_year)		{	b_year = false;		my_publication.setYear(ch);		}
+		else if(b_volume)	{	b_volume = false;	my_publication.setVolume(ch);	}
+		else if(b_journal)	{	b_journal = false;	my_publication.setJournal(ch);	}
+		else if(b_number)	{	b_number = false;	my_publication.setNumber(ch);	}
+		else if(b_url)		{	b_url = false;		my_publication.setURL(ch);		}
+		else if(b_ee)		{	b_ee = false;		my_publication.setEE(ch);		}
+		else if(b_article)	{	b_article = false;	}
 
 		ch = null;
 	}

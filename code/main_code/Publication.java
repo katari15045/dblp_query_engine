@@ -4,14 +4,7 @@ public class Publication implements Cloneable
 {
 
 	private List<StringBuilder> author_array;
-	private StringBuilder title;
-	private StringBuilder pages;
-	private StringBuilder year;
-	private StringBuilder volume;
-	private StringBuilder journal;
-	private StringBuilder number;
-	private StringBuilder url;
-	private StringBuilder ee;
+	private StringBuilder title,pages,year,volume,journal,number,url,ee;
 
 	public Publication()
 	{
@@ -152,44 +145,13 @@ public class Publication implements Cloneable
 		return to_return;
 	}
 
-	public StringBuilder getTitle()
-	{
-		return title;
-	}
-
-	public StringBuilder getPages()
-	{
-		return pages;
-	}
-
-	public StringBuilder getYear()
-	{
-		return year;
-	}
-
-	public StringBuilder getVolume()
-	{
-		return volume;
-	}
-
-	public StringBuilder getJournal()
-	{
-		return journal;
-	}
-
-	public StringBuilder getNumber()
-	{
-		return number;
-	}
-
-	public StringBuilder getURL()
-	{
-		return url;
-	}
-
-	public StringBuilder getEE()
-	{
-		return ee;
-	}
+	public StringBuilder getTitle()		{	return title;	}
+	public StringBuilder getPages()		{	return pages;	}
+	public StringBuilder getYear()		{	return year;	}
+	public StringBuilder getVolume()	{	return volume;	}
+	public StringBuilder getJournal()	{	return journal;	}
+	public StringBuilder getNumber()	{	return number;	}
+	public StringBuilder getURL()		{	return url;		}
+	public StringBuilder getEE()		{	return ee;		}
 
 }
