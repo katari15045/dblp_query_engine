@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Publication
+public class Publication implements Cloneable							
 {
 
 	private List<StringBuilder> author_array;
@@ -24,6 +24,22 @@ public class Publication
 		number = new StringBuilder();
 		url = new StringBuilder();
 		ee = new StringBuilder();
+	}
+
+	public Object clone()
+	{
+		Object to_return = null;
+
+		try
+		{
+			to_return = super.clone();
+		}
+		catch(CloneNotSupportedException e)
+		{
+			System.out.println(e);
+		}
+
+		return to_return;
 	}
 
 	public void clearAuthorArray()
