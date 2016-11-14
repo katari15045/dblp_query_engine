@@ -2,9 +2,8 @@ import javax.xml.parsers.*;
 import org.xml.sax.helpers.*;
 import org.xml.sax.*;
 
-public class DataParser
+public class DataParser extends DefaultHandler
 {
-
 	static
 	{
 		System.setProperty("jdk.xml.entityExpansionLimit", "0");
@@ -12,43 +11,9 @@ public class DataParser
 
 	SAXParserFactory spf;
 	SAXParser sp;
-	MyDefaultHandler dh;
-
-	public DataParser()
-	{
-		spf = null;
-		sp = null;
-		dh = new MyDefaultHandler();
-	}
-
-	public void startParsing()
-	{
-		try
-		{
-			spf = SAXParserFactory.newInstance();
-			sp = spf.newSAXParser();
-			sp.parse("dblp.xml",dh);
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
-		finally
-		{
-			spf = null;
-			sp = null;
-			dh = null;
-		}
-	}
-
-}
-
-class MyDefaultHandler extends DefaultHandler
-{
 	Publication my_publication;
 	DataBase my_data_base;
 	
-
 	boolean b_article=false;
 	boolean b_author=false;
 	boolean b_title=false;
@@ -61,67 +26,47 @@ class MyDefaultHandler extends DefaultHandler
 	boolean b_ee=false;
 
 	int count_entities=0;
-	int year,number;
-	
 
-	public MyDefaultHandler()
+	public DataParser()
 	{
+		spf = null;
+		sp = null;
 		my_publication = new Publication();
 		my_data_base = new DataBase();
 	}
 
+	public void startParsing()
+	{
+		try
+		{
+			spf = SAXParserFactory.newInstance();
+			sp = spf.newSAXParser();
+			sp.parse("dblp.xml",this);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally
+		{
+			spf = null;
+			sp = null;
+		}
+	}
+
 	public void startElement(String uri,String local_name,String q_name,Attributes attr) throws SAXException
 	{
-		if(q_name.equalsIgnoreCase("author"))
-		{
-			b_author = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("title"))
-		{
-			b_title = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("pages"))
-		{
-			b_pages = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("year"))
-		{
-			b_year = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("volume"))
-		{
-			b_volume = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("journal"))
-		{
-			b_journal = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("number"))
-		{
-			b_number = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("url"))
-		{
-			b_url = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("ee"))
-		{
-			b_ee = true;
-		}
-
-		else if(q_name.equalsIgnoreCase("article"))
-		{
-			b_article = true;
-		}
-
+		if(q_name.equalsIgnoreCase("author"))	b_author = true;
+		else if(q_name.equalsIgnoreCase("title"))	b_title = true;
+		else if(q_name.equalsIgnoreCase("pages"))	b_pages = true;
+		else if(q_name.equalsIgnoreCase("year"))	b_year = true;
+		else if(q_name.equalsIgnoreCase("volume"))	b_volume = true;
+		else if(q_name.equalsIgnoreCase("journal"))	b_journal = true;
+		else if(q_name.equalsIgnoreCase("number"))	b_number = true;
+		else if(q_name.equalsIgnoreCase("url"))	b_url = true;
+		else if(q_name.equalsIgnoreCase("ee"))	b_ee = true;
+		else if(q_name.equalsIgnoreCase("article"))	b_article = true;
+		
 		uri = null;
 		local_name = null;
 		q_name = null;
@@ -132,7 +77,6 @@ class MyDefaultHandler extends DefaultHandler
 	{
 		if(b_author)
 		{
-			
 			my_publication.setAuthor(ch);
 			b_author = false;
 		}
@@ -191,7 +135,6 @@ class MyDefaultHandler extends DefaultHandler
 		}
 
 		ch = null;
-
 	}
 
 	public void endElement (String uri, String localName, String qName) throws SAXException
@@ -202,6 +145,10 @@ class MyDefaultHandler extends DefaultHandler
         	my_publication.clearAuthorArray();
 			count_entities = count_entities + 1;
         }
+
+        uri = null;
+        localName = null;
+        qName = null;
     }
 
 	public void endDocument() throws SAXException
@@ -210,3 +157,4 @@ class MyDefaultHandler extends DefaultHandler
 	}
 
 }
+
