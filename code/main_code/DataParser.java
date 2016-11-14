@@ -44,6 +44,24 @@ public class DataParser extends DefaultHandler
 		}
 	}
 
+	private char[] getCharArray(char[] inp_array,Integer start,Integer length)
+	{
+		String temp_string = new String(inp_array,start,length);
+
+		try
+		{
+			return temp_string.toCharArray();
+		}
+
+		finally
+		{
+			inp_array = null;
+			start = null;
+			length = null;
+			temp_string = null;
+		}
+	}
+
 	public void startElement(String uri,String local_name,String q_name,Attributes attr) throws SAXException
 	{
 		if(q_name.equalsIgnoreCase("author"))		b_author = true;
@@ -65,15 +83,15 @@ public class DataParser extends DefaultHandler
 
 	public void characters(char ch[],int start,int length) throws SAXException
 	{
-		if(b_author)		{	b_author = false;	my_publication.setAuthor(ch);	}
-		else if(b_title)	{	b_title = false;	my_publication.setTitle(ch);	}
-		else if(b_pages)	{	b_pages = false;	my_publication.setPages(ch);	}
-		else if(b_year)		{	b_year = false;		my_publication.setYear(ch);		}
-		else if(b_volume)	{	b_volume = false;	my_publication.setVolume(ch);	}
-		else if(b_journal)	{	b_journal = false;	my_publication.setJournal(ch);	}
-		else if(b_number)	{	b_number = false;	my_publication.setNumber(ch);	}
-		else if(b_url)		{	b_url = false;		my_publication.setURL(ch);		}
-		else if(b_ee)		{	b_ee = false;		my_publication.setEE(ch);		}
+		if(b_author)		{	b_author = false;	my_publication.setAuthor( getCharArray(ch,start,length) );	}
+		else if(b_title)	{	b_title = false;	my_publication.setTitle( getCharArray(ch,start,length) );	}
+		else if(b_pages)	{	b_pages = false;	my_publication.setPages( getCharArray(ch,start,length) );	}
+		else if(b_year)		{	b_year = false;		my_publication.setYear( getCharArray(ch,start,length) );	}
+		else if(b_volume)	{	b_volume = false;	my_publication.setVolume( getCharArray(ch,start,length) );	}
+		else if(b_journal)	{	b_journal = false;	my_publication.setJournal( getCharArray(ch,start,length) );	}
+		else if(b_number)	{	b_number = false;	my_publication.setNumber( getCharArray(ch,start,length) );	}
+		else if(b_url)		{	b_url = false;		my_publication.setURL( getCharArray(ch,start,length) );		}
+		else if(b_ee)		{	b_ee = false;		my_publication.setEE( getCharArray(ch,start,length) );		}
 		else if(b_article)	{	b_article = false;	}
 
 		ch = null;
