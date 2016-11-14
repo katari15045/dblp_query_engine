@@ -31,7 +31,7 @@ public class DataParser extends DefaultHandler
 		{
 			spf = SAXParserFactory.newInstance();
 			sp = spf.newSAXParser();
-			sp.parse("dblp.xml",this);
+			sp.parse("sample.xml",this);
 		}
 		catch(Exception e)
 		{

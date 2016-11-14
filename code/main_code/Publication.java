@@ -113,7 +113,7 @@ public class Publication implements Cloneable
 		StringBuilder inp_author_sb = new StringBuilder();
 		inp_author_sb.append(inp_author);
 		String inp_author_name = inp_author_sb.toString();
-		Iterator iter = author_array.iterator();
+		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{

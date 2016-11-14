@@ -8,20 +8,19 @@ public class DataBase
 
 	public void storeData()
 	{
+		publication_list = new LinkedList<Publication>();
 		my_data_parser = new DataParser();
 		my_data_parser.startParsing();
 	}
 
 	public void storePublication(Publication inp_publication)
 	{
-		publication_list = new LinkedList<Publication>();
-		Publication cloned_publication = (Publication) inp_publication.clone();
-		publication_list.add(cloned_publication);
-		cloned_publication = null;
+		Publication new_publication = new Publication();
+		new_publication = null;
 		inp_publication = null;	
 	}
 
-	public List getPublicationList()
+	public List<Publication> getPublicationList()
 	{
 		return publication_list;
 	}

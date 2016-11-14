@@ -2,8 +2,7 @@
 
 public class DBLPQueryEngine
 {
-	DataParser my_data_parser;
-	DataProcessor my_data_processor;
+	private static DataProcessor my_data_processor;
 
 	public DBLPQueryEngine()
 	{
@@ -13,6 +12,7 @@ public class DBLPQueryEngine
 	public static void main(String[] args)
 	{
 		new DBLPQueryEngine();
+		my_data_processor.printPublicationList();
 	}
 
 }
