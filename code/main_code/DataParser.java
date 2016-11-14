@@ -10,12 +10,19 @@ public class DataParser
 		System.setProperty("jdk.xml.entityExpansionLimit", "0");
 	}
 
-	public static void main(String[] args)
-	{
-		SAXParserFactory spf = null;
-		SAXParser sp = null;
-		MyDefaultHandler dh = new MyDefaultHandler();
+	SAXParserFactory spf;
+	SAXParser sp;
+	MyDefaultHandler dh;
 
+	public DataParser()
+	{
+		spf = null;
+		sp = null;
+		dh = new MyDefaultHandler();
+	}
+
+	public void startParsing()
+	{
 		try
 		{
 			spf = SAXParserFactory.newInstance();
@@ -26,7 +33,12 @@ public class DataParser
 		{
 			System.out.println(e);
 		}
-		
+		finally
+		{
+			spf = null;
+			sp = null;
+			dh = null;
+		}
 	}
 
 }
@@ -188,12 +200,9 @@ class MyDefaultHandler extends DefaultHandler
 		System.out.println("Entities : " + count_entities);
 	}
 
-/*
 	public Publication getParsedPublication()
 	{
-
+		return my_publication;   
 	}
-
-*/
 
 }
