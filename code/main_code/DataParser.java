@@ -1,7 +1,6 @@
 import javax.xml.parsers.*;
 import org.xml.sax.helpers.*;
 import org.xml.sax.*;
-import java.util.*;
 
 public class DataParser
 {
@@ -48,7 +47,7 @@ class MyDefaultHandler extends DefaultHandler
 {
 	Publication my_publication;
 	DataBase my_data_base;
-	List<Publication> my_list = new LinkedList<Publication>();
+	
 
 	boolean b_article=false;
 	boolean b_author=false;
@@ -199,7 +198,8 @@ class MyDefaultHandler extends DefaultHandler
     {
         if( qName.equalsIgnoreCase("article") )
         {
-        	storeCurrentPublication();
+        	my_data_base.storeCurrentPublication(my_publication);
+        	my_publication.clearAuthorArray();
 			count_entities = count_entities + 1;
         }
     }
@@ -207,14 +207,6 @@ class MyDefaultHandler extends DefaultHandler
 	public void endDocument() throws SAXException
 	{
 		System.out.println("Entities : " + count_entities);
-	}
-
-	public void storeCurrentPublication()
-	{
-		Publication cloned_publication = (Publication) my_publication.clone();
-		my_list.add(cloned_publication);
-		cloned_publication = null;
-		my_publication.clearAuthorArray();
 	}
 
 }
