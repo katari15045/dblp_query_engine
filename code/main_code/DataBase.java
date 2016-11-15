@@ -15,9 +15,8 @@ public class DataBase
 
 	public void storePublication(Publication inp_publication)
 	{
-		Publication new_publication = new Publication();
-		new_publication = null;
-		inp_publication = null;	
+		publication_list.add(inp_publication);
+		//inp_publication = null;	
 	}
 
 	public List<Publication> getPublicationList()

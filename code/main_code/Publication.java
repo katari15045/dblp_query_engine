@@ -19,13 +19,22 @@ public class Publication implements Cloneable
 		ee = new StringBuilder();
 	}
 
-	public Object clone()
+	public Publication clone()
 	{
-		Object to_return = null;
+		Publication to_return = null;
 
 		try
 		{
-			to_return = super.clone();
+			to_return = (Publication) super.clone();	// Shallow Copying
+			to_return.author_array = new LinkedList<StringBuilder>(author_array);	// Deep Copying
+			to_return.title = new StringBuilder(title);
+			to_return.pages = new StringBuilder(pages);
+			to_return.year = new StringBuilder(year);
+			to_return.volume = new StringBuilder(volume);
+			to_return.journal = new StringBuilder(journal);
+			to_return.number = new StringBuilder(number);
+			to_return.url = new StringBuilder(url);
+			to_return.ee = new StringBuilder(ee);
 		}
 		catch(CloneNotSupportedException e)
 		{
