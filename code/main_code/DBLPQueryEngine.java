@@ -14,7 +14,7 @@ public class DBLPQueryEngine
 	public static void main(String[] args)
 	{
 		new DBLPQueryEngine();
-		author_for_entity_resolution.append("ravishankar");
+		author_for_entity_resolution.append("zxzxwqxzwqzx");
 		my_data_processor.performEntityResolution( author_for_entity_resolution );
 		my_data_processor.printPublicationList();
 	}

@@ -19,13 +19,15 @@ public class DataProcessor
 	{
 		List<Publication> my_list = my_data_base.getPublicationList();
 		Iterator<Publication> iter = my_list.iterator();
+		Integer count = 0;
 
 		while( iter.hasNext() )
 		{
 			Publication temp_publication = iter.next();
+			count = count + 1;
 
 			System.out.println();
-			//System.out.println("Authors : ");
+			//System.out.print("Authors : ");
 			//temp_publication.printAuthorList();
 			System.out.println("Title : " + temp_publication.getTitle());
 			System.out.println("Pages : " + temp_publication.getPages());
@@ -40,7 +42,22 @@ public class DataProcessor
 			temp_publication = null;
 		}
 
+		if( count == 0 )
+		{
+			System.out.println();
+			System.out.println("No such Author!!!");
+			System.out.println();
+		}
+
+		else
+		{
+			System.out.println();
+			System.out.println("count : " + count);
+			System.out.println();
+		}
+
 		iter = null;
+		count = null;
 	}
 
 }
