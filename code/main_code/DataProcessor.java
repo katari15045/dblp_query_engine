@@ -7,7 +7,12 @@ public class DataProcessor
 	public DataProcessor()
 	{
 		my_data_base = new DataBase();
-		my_data_base.storeData();
+	}
+
+	public void performEntityResolution(StringBuilder inp_author)
+	{
+		my_data_base.storePublicationsForEntityResolution(inp_author);
+
 	}
 
 	public void printPublicationList()
@@ -20,6 +25,8 @@ public class DataProcessor
 			Publication temp_publication = iter.next();
 
 			System.out.println();
+			//System.out.println("Authors : ");
+			//temp_publication.printAuthorList();
 			System.out.println("Title : " + temp_publication.getTitle());
 			System.out.println("Pages : " + temp_publication.getPages());
 			System.out.println("Year : " + temp_publication.getYear());

@@ -3,7 +3,7 @@ import java.util.*;
 public class Publication implements Cloneable							
 {
 
-	private List<StringBuilder> author_array;
+	protected List<StringBuilder> author_array;
 	private StringBuilder title,pages,year,volume,journal,number,url,ee;
 
 	public Publication()
@@ -44,16 +44,28 @@ public class Publication implements Cloneable
 		return to_return;
 	}
 
-	public void clearAuthorArray()
+	public void clearAuthorList()
 	{
 		author_array.clear();
+	}
+
+	public void printAuthorList()
+	{
+		Iterator<StringBuilder> iter = author_array.iterator();
+
+		while( iter.hasNext() )
+		{
+			System.out.print( iter.next() + ", " );
+		}
+
+		System.out.println();
+		iter = null;
 	}
 
 	public void setAuthor(char[] inp_author)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(inp_author);
-		sb = null;
 		author_array.add(sb);
 		inp_author = null;
 	}
@@ -116,12 +128,9 @@ public class Publication implements Cloneable
 //-----------------------------------------------------------
 
 
-	public boolean doesAuthorExist(char[] inp_author)
+	public boolean doesAuthorExist(String inp_author_name)
 	{
 		boolean to_return = false;
-		StringBuilder inp_author_sb = new StringBuilder();
-		inp_author_sb.append(inp_author);
-		String inp_author_name = inp_author_sb.toString();
 		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
@@ -146,8 +155,6 @@ public class Publication implements Cloneable
 			my_author_name = null;
 		}
 
-		inp_author = null;
-		inp_author_sb = null;
 		inp_author_name = null;
 		iter = null;
 

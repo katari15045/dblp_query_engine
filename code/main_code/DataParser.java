@@ -9,13 +9,13 @@ public class DataParser extends DefaultHandler
 		System.setProperty("jdk.xml.entityExpansionLimit", "0");
 	}
 
-	SAXParserFactory spf;
-	SAXParser sp;
-	Publication my_publication;
-	DataBase my_data_base;
+	static SAXParserFactory spf;
+	static SAXParser sp;
+	static Publication my_publication;
+	static DataBase my_data_base;
 	
-	boolean b_article,b_author,b_title,b_pages,b_year,b_volume,b_journal,b_number,b_url,b_ee;	// By Default Boolean variable is false
-	int count_entities=0;
+	static boolean b_article,b_author,b_title,b_pages,b_year,b_volume,b_journal,b_number,b_url,b_ee;	// By Default Boolean variable is false
+	static int count_entities=0;
 
 	public DataParser()
 	{
@@ -31,7 +31,7 @@ public class DataParser extends DefaultHandler
 		{
 			spf = SAXParserFactory.newInstance();
 			sp = spf.newSAXParser();
-			sp.parse("sample.xml",this);
+			sp.parse("dblp.xml",this);
 		}
 		catch(Exception e)
 		{
@@ -44,7 +44,7 @@ public class DataParser extends DefaultHandler
 		}
 	}
 
-	private char[] getCharArray(char[] inp_array,Integer start,Integer length)
+	private static char[] getCharArray(char[] inp_array,Integer start,Integer length)
 	{
 		String temp_string = new String(inp_array,start,length);
 
@@ -101,8 +101,8 @@ public class DataParser extends DefaultHandler
     {
         if( qName.equalsIgnoreCase("article") )
         {
-        	my_data_base.storePublication( my_publication.clone() );
-        	my_publication.clearAuthorArray();
+        	my_data_base.storePublication(my_publication);
+        	my_publication.clearAuthorList();
 			count_entities = count_entities + 1;
         }
 
