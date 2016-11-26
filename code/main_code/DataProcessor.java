@@ -27,7 +27,7 @@ public class DataProcessor
 		Collections.sort( DataBase.publication_list, new MyComparator() );
 	}
 
-	public void printPublicationListSortedByYear()
+	public void printPublicationList()
 	{
 		Iterator<Publication> iter = DataBase.getPublicationList().iterator();
 		Integer count = 0;
@@ -38,18 +38,42 @@ public class DataProcessor
 			System.out.println( iter.next() );
 		}
 
-		if( count == 0 )
-		{
-			System.out.printf("\nNo such Author!!!\n\n");
-		}
-
-		else
+		if(count != 0)
 		{
 			System.out.printf("\ncount : %d\n\n",count);
 		}
 
 		iter = null;
 		count = null;
+	}
+
+	public void getPublicationListSinceAnYear(StringBuilder inp_year)
+	{
+		Iterator<Publication> iter = DataBase.getPublicationList().iterator();
+		Integer count = 0;
+		Integer input_year = Integer.parseInt( inp_year.toString() );
+
+		while( iter.hasNext() )
+		{
+			count = count + 1;
+			Publication temp_pub = iter.next();
+			Integer publication_year = Integer.parseInt( temp_pub.getYear().toString() );
+
+			if( publication_year <= input_year )
+			{
+				iter.remove();
+			}
+		}
+
+		if( count != 0 )
+		{
+			System.out.printf("\ncount : %d\n\n",count);
+		}
+
+		iter = null;
+		count = null;
+		inp_year = null;
+		
 	}
 
 }

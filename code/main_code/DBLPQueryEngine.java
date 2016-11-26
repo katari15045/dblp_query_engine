@@ -21,8 +21,11 @@ public class DBLPQueryEngine
 		title_tags_list.add( new StringBuilder("trees") );
 		title_tags_list.add( new StringBuilder("Nets") );
 		my_data_processor.findPublicationsByTitleTags(title_tags_list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("1975");
+		my_data_processor.getPublicationListSinceAnYear(sb);
 		my_data_processor.sortByDate();
-		my_data_processor.printPublicationListSortedByYear();
+		my_data_processor.printPublicationList();
 	}
 
 }
