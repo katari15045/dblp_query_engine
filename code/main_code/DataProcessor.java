@@ -7,6 +7,7 @@ public class DataProcessor
 	public DataProcessor()
 	{
 		my_data_base = new DataBase();
+		my_data_base.initializeObjects();
 	}
 
 	public void performEntityResolution(StringBuilder inp_author)

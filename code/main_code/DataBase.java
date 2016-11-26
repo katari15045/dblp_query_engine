@@ -14,11 +14,12 @@ public class DataBase
 	{
 		publication_list = new LinkedList<Publication>();
 		my_data_parser = new DataParser();
+		author_name = new StringBuilder();
+		title_tags_list = new LinkedList<StringBuilder>();
 	}
 
 	public static void storePublication(Publication inp_publication)
 	{
-
 		if( decideToStore(inp_publication) )
 		{
 			publication_list.add( inp_publication.clone() );
@@ -48,17 +49,15 @@ public class DataBase
 	// For Entity Resolution
 	public static void storePublicationsForEntityResolution(StringBuilder inp_author_sb)	
 	{	
-		initializeObjects();
-		
-		String inp_author = inp_author_sb.toString();
-		author_name = new StringBuilder();
-
 		store_for_authors = true;
+
+		String inp_author = inp_author_sb.toString();
 		deleteStringBuilder(inp_author_sb);
 		author_name.append(inp_author);
+
 		my_data_parser.startParsing();
+
 		inp_author_sb = null;
-		inp_author = null;
 	}
 
 	public static void deleteStringBuilder(StringBuilder inp_sb)
@@ -71,7 +70,7 @@ public class DataBase
 
 	public static void storePublicationsBasedOnTitleTags(List<StringBuilder> inp_title_tags_list)
 	{
-		initializeObjects();
+	
 	}
 
 	public static void getStringListFromStringBuilderList(List<StringBuilder> inp_title_tags_list)
