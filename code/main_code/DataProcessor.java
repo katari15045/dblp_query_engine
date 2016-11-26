@@ -37,12 +37,8 @@ public class DataProcessor
 			count = count + 1;
 			System.out.println( iter.next() );
 		}
-
-		if(count != 0)
-		{
-			System.out.printf("\ncount : %d\n\n",count);
-		}
-
+		
+		System.out.printf("\ncount : %d\n\n",count);
 		iter = null;
 		count = null;
 	}
@@ -63,17 +59,14 @@ public class DataProcessor
 			{
 				iter.remove();
 			}
-		}
 
-		if( count != 0 )
-		{
-			System.out.printf("\ncount : %d\n\n",count);
+			temp_pub = null;
+			publication_year = null;
 		}
 
 		iter = null;
 		count = null;
-		inp_year = null;
-		
+		inp_year = null;	
+		input_year = null;
 	}
-
 }
