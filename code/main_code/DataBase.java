@@ -10,14 +10,14 @@ public class DataBase
 	static boolean store_for_title_tags;
 	static List<StringBuilder> title_tags_list;
 
-	public DataBase()
+	public static void initializeObjects()
 	{
-		initializeClasses();
+		publication_list = new LinkedList<Publication>();
+		my_data_parser = new DataParser();
 	}
 
 	public static void storePublication(Publication inp_publication)
 	{
-		//System.out.println("Austria");
 
 		if( decideToStore(inp_publication) )
 		{
@@ -48,36 +48,35 @@ public class DataBase
 	// For Entity Resolution
 	public static void storePublicationsForEntityResolution(StringBuilder inp_author_sb)	
 	{	
+		initializeObjects();
+		
 		String inp_author = inp_author_sb.toString();
 		author_name = new StringBuilder();
 
 		store_for_authors = true;
-
-		if( author_name.length() >= 1 )
-		{
-			author_name.delete( 0,author_name.length()-1 );
-		}
-
+		deleteStringBuilder(inp_author_sb);
 		author_name.append(inp_author);
 		my_data_parser.startParsing();
 		inp_author_sb = null;
 		inp_author = null;
 	}
 
-	public static void initializeClasses()
+	public static void deleteStringBuilder(StringBuilder inp_sb)
 	{
-		publication_list = new LinkedList<Publication>();
-		my_data_parser = new DataParser();
+		if( inp_sb.length() >= 1 )
+		{
+			inp_sb.delete( 0,inp_sb.length()-1 );
+		}
 	}
 
 	public static void storePublicationsBasedOnTitleTags(List<StringBuilder> inp_title_tags_list)
 	{
-		initializeClasses();
+		initializeObjects();
 	}
 
 	public static void getStringListFromStringBuilderList(List<StringBuilder> inp_title_tags_list)
 	{
-		Iterator<StringBuilder> iter = inp_title_tags_list.Iterator();
+		Iterator<StringBuilder> iter = inp_title_tags_list.iterator();
 
 		while( iter.hasNext() )
 		{
