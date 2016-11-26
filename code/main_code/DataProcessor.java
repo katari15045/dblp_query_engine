@@ -37,7 +37,7 @@ public class DataProcessor
 			count = count + 1;
 			System.out.println( iter.next() );
 		}
-		
+
 		System.out.printf("\ncount : %d\n\n",count);
 		iter = null;
 		count = null;
@@ -55,7 +55,7 @@ public class DataProcessor
 			Publication temp_pub = iter.next();
 			Integer publication_year = Integer.parseInt( temp_pub.getYear().toString() );
 
-			if( publication_year <= input_year )
+			if( publication_year < input_year )
 			{
 				iter.remove();
 			}
@@ -69,4 +69,35 @@ public class DataProcessor
 		inp_year = null;	
 		input_year = null;
 	}
+
+	public void getPublicationListBetweenTwoYears(StringBuilder inp_year_1, StringBuilder inp_year_2)
+	{
+		Iterator<Publication> iter = DataBase.getPublicationList().iterator();
+		Integer count = 0;
+		Integer input_year_1 = Integer.parseInt( inp_year_1.toString() );
+		Integer input_year_2 = Integer.parseInt( inp_year_2.toString() );
+
+		while( iter.hasNext() )
+		{
+			count = count + 1;
+			Publication temp_pub = iter.next();
+			Integer publication_year = Integer.parseInt( temp_pub.getYear().toString() );
+
+			if( publication_year < input_year_1 || publication_year > input_year_2 )
+			{
+				iter.remove();
+			}
+
+			temp_pub = null;
+			publication_year = null;
+		}
+
+		iter = null;
+		count = null;
+		inp_year_1 = null;
+		inp_year_2 = null;
+		input_year_1 = null;
+		input_year_2 = null;
+	}
+
 }
