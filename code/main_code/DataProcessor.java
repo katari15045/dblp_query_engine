@@ -27,45 +27,25 @@ public class DataProcessor
 		Collections.sort( DataBase.publication_list, new MyComparator() );
 	}
 
-	public void printPublicationList()
+	public void printPublicationListSortedByYear()
 	{
-		List<Publication> my_list = DataBase.getPublicationList();
-		Iterator<Publication> iter = my_list.iterator();
+		Iterator<Publication> iter = DataBase.getPublicationList().iterator();
 		Integer count = 0;
 
 		while( iter.hasNext() )
 		{
-			Publication temp_publication = iter.next();
 			count = count + 1;
-
-			System.out.println();
-			//System.out.print("Authors : ");
-			//temp_publication.printAuthorList();
-			System.out.println("Title : " + temp_publication.getTitle());
-			System.out.println("Pages : " + temp_publication.getPages());
-			System.out.println("Year : " + temp_publication.getYear());
-			System.out.println("Volume : " + temp_publication.getVolume());
-			System.out.println("Journal : " + temp_publication.getJournal());
-			System.out.println("Number : " + temp_publication.getNumber());
-			System.out.println("URL : " + temp_publication.getURL());
-			System.out.println("EE : " + temp_publication.getEE());
-			System.out.println();
-
-			temp_publication = null;
+			System.out.println( iter.next() );
 		}
 
 		if( count == 0 )
 		{
-			System.out.println();
-			System.out.println("No such Author!!!");
-			System.out.println();
+			System.out.printf("\nNo such Author!!!\n\n");
 		}
 
 		else
 		{
-			System.out.println();
-			System.out.println("count : " + count);
-			System.out.println();
+			System.out.printf("\ncount : %d\n\n",count);
 		}
 
 		iter = null;

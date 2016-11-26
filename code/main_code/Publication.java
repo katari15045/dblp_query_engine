@@ -19,6 +19,13 @@ public class Publication implements Cloneable
 		ee = new StringBuilder();
 	}
 
+	public String toString()
+	{
+		return String.format("Title : %s\nPages : %s\nYear : %s\nVolume : %s\nJournal : %s\nNumber : %s\nURL : %s\nEE : %s\n\n",
+							getTitle(),getPages(),getYear(),getVolume(),getJournal(),getNumber(),getURL(),getEE() );
+		// Authors are to be printed
+	}
+
 	public Publication clone()
 	{
 		Publication to_return = null;

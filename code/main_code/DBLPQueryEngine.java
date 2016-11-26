@@ -22,7 +22,7 @@ public class DBLPQueryEngine
 		title_tags_list.add( new StringBuilder("Nets") );
 		my_data_processor.findPublicationsByTitleTags(title_tags_list);
 		my_data_processor.sortByDate();
-		my_data_processor.printPublicationList();
+		my_data_processor.printPublicationListSortedByYear();
 	}
 
 }
