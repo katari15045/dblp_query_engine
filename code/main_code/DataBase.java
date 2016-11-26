@@ -12,7 +12,7 @@ public class DataBase
 
 	public static void initializeObjects()
 	{
-		publication_list = new LinkedList<Publication>();
+		publication_list = new ArrayList<Publication>();
 		my_data_parser = new DataParser();
 		author_name = new StringBuilder();
 		title_tags_list = new HashSet<StringBuilder>();

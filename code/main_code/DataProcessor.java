@@ -22,9 +22,14 @@ public class DataProcessor
 		inp_title_tags_list_sb = null;
 	}
 
+	public void sortByDate()
+	{
+		Collections.sort( DataBase.publication_list, new MyComparator() );
+	}
+
 	public void printPublicationList()
 	{
-		List<Publication> my_list = my_data_base.getPublicationList();
+		List<Publication> my_list = DataBase.getPublicationList();
 		Iterator<Publication> iter = my_list.iterator();
 		Integer count = 0;
 
