@@ -161,6 +161,35 @@ public class Publication implements Cloneable
 		return to_return;
 	}
 
+	public boolean doTitleTagsforPublicationMatch(Set<StringBuilder> inp_title_tags_list)
+	{
+		Iterator<StringBuilder> iter = inp_title_tags_list.iterator();
+		boolean to_return = false;
+
+		while( iter.hasNext() )
+		{
+			String tag_str = iter.next().toString();
+			String pub_str = this.getTitle().toString();
+
+			for( String publication_str: pub_str.split(" ") )
+			{
+				if( tag_str.equalsIgnoreCase(publication_str) )
+				{
+					to_return = true;
+				}
+
+				publication_str = null;
+			}
+			
+			tag_str = null;
+			pub_str = null;
+		}
+
+		iter = null;
+		inp_title_tags_list = null;
+		return to_return;
+	}
+
 	public StringBuilder getTitle()		{	return title;	}
 	public StringBuilder getPages()		{	return pages;	}
 	public StringBuilder getYear()		{	return year;	}

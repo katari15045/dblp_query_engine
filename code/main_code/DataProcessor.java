@@ -7,7 +7,7 @@ public class DataProcessor
 	public DataProcessor()
 	{
 		my_data_base = new DataBase();
-		my_data_base.initializeObjects();
+		DataBase.initializeObjects();
 	}
 
 	public void performEntityResolution(StringBuilder inp_author)
@@ -16,7 +16,7 @@ public class DataProcessor
 		inp_author = null;
 	}
 
-	public void findPublicationsByTitleTags( List<StringBuilder> inp_title_tags_list_sb )
+	public void findPublicationsByTitleTags( Set<StringBuilder> inp_title_tags_list_sb )
 	{
 		my_data_base.storePublicationsBasedOnTitleTags(inp_title_tags_list_sb);
 		inp_title_tags_list_sb = null;
