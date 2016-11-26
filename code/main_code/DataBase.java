@@ -7,17 +7,27 @@ public class DataBase
 	static DataParser my_data_parser;
 	static boolean store_for_authors;
 	static boolean store_for_title_tags;
-	static StringBuilder store_based_on_author;
+	static StringBuilder author_name;
 
 	public static void storePublication(Publication inp_publication)
 	{
 		//System.out.println("Austria");
 
+		if( decideToStore )
+		{
+			publication_list.add( inp_publication.clone() );
+		}
+
+		inp_publication = null;	
+	}
+
+	public static boolean decideToStore()
+	{
 		if(store_for_authors)
 		{
-			if( inp_publication.doesAuthorExist( store_based_on_author.toString() ) )
+			if( inp_publication.doesAuthorExist( author_name.toString() ) )
 			{
-				publication_list.add( inp_publication.clone() );
+				return true;
 			}
 		}
 
@@ -26,7 +36,7 @@ public class DataBase
 
 		}
 
-		inp_publication = null;	
+		return false;
 	}
 
 	// For Entity Resolution
@@ -35,16 +45,16 @@ public class DataBase
 		publication_list = new LinkedList<Publication>();
 		my_data_parser = new DataParser();
 		String inp_author = inp_author_sb.toString();
-		store_based_on_author = new StringBuilder();
+		author_name = new StringBuilder();
 
 		store_for_authors = true;
 
-		if( store_based_on_author.length() >= 1 )
+		if( author_name.length() >= 1 )
 		{
-			store_based_on_author.delete( 0,store_based_on_author.length()-1 );
+			author_name.delete( 0,author_name.length()-1 );
 		}
 
-		store_based_on_author.append(inp_author);
+		author_name.append(inp_author);
 		my_data_parser.startParsing();
 		inp_author_sb = null;
 		inp_author = null;
