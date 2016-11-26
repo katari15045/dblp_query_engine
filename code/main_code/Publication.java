@@ -5,6 +5,7 @@ public class Publication implements Cloneable
 
 	protected List<StringBuilder> author_array;
 	private StringBuilder title,pages,year,volume,journal,number,url,ee;
+	private int relevance;
 
 	public Publication()
 	{
@@ -23,7 +24,7 @@ public class Publication implements Cloneable
 	{
 		System.out.println("Authors : ");
 		printAuthorList();
-		
+
 		return String.format("Title : %s\nPages : %s\nYear : %s\nVolume : %s\nJournal : %s\nNumber : %s\nURL : %s\nEE : %s\n\n",
 							getTitle(),getPages(),getYear(),getVolume(),getJournal(),getNumber(),getURL(),getEE() );
 	}
@@ -137,14 +138,16 @@ public class Publication implements Cloneable
 //-----------------------------------------------------------
 
 
-	public boolean doesAuthorExist(String inp_author_name)
+	public int doesAuthorExist(String inp_author_name)
 	{
-		boolean to_return = false;
+		int count = 0;
+		int max = -2;
 		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{
 			String my_author_name = iter.next().toString();		// Authors in this Publication
+			count = 0;
 
 			for( String first_string: inp_author_name.split(" ") )
 			{
@@ -152,7 +155,19 @@ public class Publication implements Cloneable
 				{
 					if( first_string.equalsIgnoreCase(second_string) )
 					{
-						to_return = true;
+						count = count + 1;
+					}
+
+					if( first_string.length() == 1 || second_string.length() == 1 || first_string.length() == 2 || second_string.length() == 2 )
+					{
+						Integer difference = first_string.charAt(0) - second_string.charAt(0);
+
+						if( difference == 32 || difference == -32 || difference == 0 )
+						{
+							count = count + 1;
+						}
+
+						difference = null;
 					}
 
 					second_string = null;
@@ -161,13 +176,19 @@ public class Publication implements Cloneable
 				first_string = null;
 			}
 
+			if( count > max )
+			{
+				max = count;
+			}
+
 			my_author_name = null;
 		}
 
 		inp_author_name = null;
 		iter = null;
 
-		return to_return;
+		relevance = max;
+		return max;
 	}
 
 	public boolean doTitleTagsforPublicationMatch(Set<StringBuilder> inp_title_tags_list)
@@ -207,5 +228,5 @@ public class Publication implements Cloneable
 	public StringBuilder getNumber()	{	return number;	}
 	public StringBuilder getURL()		{	return url;		}
 	public StringBuilder getEE()		{	return ee;		}
-
+	public int 		getRelevance()	{	return relevance;	}
 }

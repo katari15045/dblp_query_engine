@@ -32,7 +32,7 @@ public class DataBase
 	{
 		if(store_for_authors)
 		{
-			if( inp_publication.doesAuthorExist( author_name.toString() ) )
+			if( inp_publication.doesAuthorExist( author_name.toString() ) > 0 )
 			{
 				return true;
 			}

@@ -14,19 +14,19 @@ public class DBLPQueryEngine
 	public static void main(String[] args)
 	{
 		new DBLPQueryEngine();
-		//author_for_entity_resolution = new StringBuilder();
-		//author_for_entity_resolution.append("zxzxwqxzwqzx");
-		//my_data_processor.performEntityResolution( author_for_entity_resolution );
-		title_tags_list = new HashSet<StringBuilder>();
-		title_tags_list.add( new StringBuilder("trees") );
-		title_tags_list.add( new StringBuilder("Nets") );
-		my_data_processor.findPublicationsByTitleTags(title_tags_list);
+		author_for_entity_resolution = new StringBuilder();
+		author_for_entity_resolution.append("hans S.");
+		my_data_processor.performEntityResolution( author_for_entity_resolution );
+		//title_tags_list = new HashSet<StringBuilder>();
+		//title_tags_list.add( new StringBuilder("trees") );
+		//title_tags_list.add( new StringBuilder("Nets") );
+		//my_data_processor.findPublicationsByTitleTags(title_tags_list);
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sb_2 = new StringBuilder();
-		sb_2.append("2016");
-		sb.append("2015");
-		my_data_processor.getPublicationListBetweenTwoYears(sb,sb_2);
-		my_data_processor.sortByDate();
+		//sb_2.append("2016");
+		//sb.append("2015");
+		//my_data_processor.getPublicationListBetweenTwoYears(sb,sb_2);
+		my_data_processor.sortByRelevance();
 		my_data_processor.printPublicationList();
 	}
 
