@@ -12,7 +12,13 @@ public class DataProcessor
 	public void performEntityResolution(StringBuilder inp_author)
 	{
 		my_data_base.storePublicationsForEntityResolution(inp_author);
+		inp_author = null;
+	}
 
+	public void findPublicationsByTitleTags( List<StringBuilder> inp_title_tags_list_sb )
+	{
+		my_data_base.storePublicationsBasedOnTitleTags(inp_title_tags_list_sb);
+		inp_title_tags_list_sb = null;
 	}
 
 	public void printPublicationList()

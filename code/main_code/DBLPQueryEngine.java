@@ -4,18 +4,23 @@ public class DBLPQueryEngine
 {
 	private static DataProcessor my_data_processor;
 	private static StringBuilder author_for_entity_resolution;
+	//private static List<StringBuilder> title_tags_list;
 
 	public DBLPQueryEngine()
 	{
 		my_data_processor = new DataProcessor();
-		author_for_entity_resolution = new StringBuilder();
 	}
 
 	public static void main(String[] args)
 	{
 		new DBLPQueryEngine();
+		author_for_entity_resolution = new StringBuilder();
 		author_for_entity_resolution.append("zxzxwqxzwqzx");
 		my_data_processor.performEntityResolution( author_for_entity_resolution );
+		//title_tags_list = new HashSet<StringBuilder>();
+		//title_tags_list.add( new StringBuilder("trees") );
+		//title_tags_list.add( new StringBuilder("Nets") );
+		//my_data_processor.findPublicationsByTitleTags(title_tags_list);
 		my_data_processor.printPublicationList();
 	}
 
