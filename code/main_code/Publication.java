@@ -24,7 +24,7 @@ public class Publication implements Cloneable
 	{
 		System.out.println("Authors : ");
 		printAuthorList();
-
+		
 		return String.format("Title : %s\nPages : %s\nYear : %s\nVolume : %s\nJournal : %s\nNumber : %s\nURL : %s\nEE : %s\n\n",
 							getTitle(),getPages(),getYear(),getVolume(),getJournal(),getNumber(),getURL(),getEE() );
 	}
@@ -190,6 +190,7 @@ public class Publication implements Cloneable
 		relevance = max;
 		return max;
 	}
+
 
 	public boolean doTitleTagsforPublicationMatch(Set<StringBuilder> inp_title_tags_list)
 	{
