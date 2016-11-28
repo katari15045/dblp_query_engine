@@ -24,9 +24,68 @@ public class Publication
 	{
 		System.out.println("Authors : ");
 		printAuthorList();
+
+		StringBuilder sb = new StringBuilder();
+
+		if( getTitle() != null )
+		{
+			sb.append("Title : ");
+			sb.append( getTitle().toString() );
+		}
+
+		if( getPages() != null )
+		{
+			sb.append("\nPages : ");
+			sb.append( getPages().toString() );
+		}
+
+		if( getYear() != null )
+		{
+			sb.append("\nYear : ");
+			sb.append( getYear().toString() );
+		}
+
+		if( getVolume() != null )
+		{
+			sb.append("\nVolume : ");
+			sb.append( getVolume().toString() );
+		}
+
+		if( getJournal() != null )
+		{
+			sb.append("\nJournal : ");
+			sb.append( getJournal().toString() );
+		}
+
+		if( getNumber() != null )
+		{
+			sb.append("\nNumber : ");
+			sb.append( getNumber().toString() );
+		}
+
+		if( getURL() != null )
+		{
+			sb.append("\nURL : ");
+			sb.append( getURL().toString() );
+		}
+
+		if( getEE() != null )
+		{
+			sb.append("\nEE : ");
+			sb.append( getEE().toString() );
+		}
 		
-		return String.format("Title : %s\nPages : %s\nYear : %s\nVolume : %s\nJournal : %s\nNumber : %s\nURL : %s\nEE : %s\n\n",
-							getTitle(),getPages(),getYear(),getVolume(),getJournal(),getNumber(),getURL(),getEE() );
+		sb.append("\n\n");
+
+		try
+		{
+			return sb.toString();
+		}
+
+		finally
+		{
+			sb = null;
+		}
 	}
 
 	public Publication myClone()
