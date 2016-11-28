@@ -13,20 +13,22 @@ public class sample
 		sb.append("Saketh Ram Katari");
 		author_array.add(sb);
 
-		System.out.println( doesAuthorExist("saketh r.") );  
+		if ( doesAuthorExist("S R K") > 0 )  
+		{
+			System.out.println("bye");
+		}
 	}
 
 
 	public static int doesAuthorExist(String inp_author_name)
 	{
-		int count = 0;
-		int max = -2;
+		Integer count_total = 0,max = -2;
 		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{
 			String my_author_name = iter.next().toString();		// Authors in this Publication
-			count = 0;
+			count_total = 0;
 
 			for( String first_string: inp_author_name.split(" ") )
 			{
@@ -34,22 +36,8 @@ public class sample
 				{
 					if( first_string.equalsIgnoreCase(second_string) )
 					{
-						count = count + 1;
-
-						System.out.println(first_string + "----" + second_string);
-					}
-
-					if( first_string.length() == 1 || second_string.length() == 1 || first_string.length() == 2 || second_string.length() == 2  )
-					{
-						Integer difference = first_string.charAt(0) - second_string.charAt(0);
-
-						if( difference == 32 || difference == -32 || difference == 0 )
-						{
-							count = count + 1;
-							System.out.println(first_string + "----" + second_string);
-						}
-
-						difference = null;
+						count_total = count_total + 1;
+						//System.out.println(first_string + "----" + second_string);
 					}
 
 					second_string = null;
@@ -58,9 +46,9 @@ public class sample
 				first_string = null;
 			}
 
-			if( count > max )
+			if( count_total > max )
 			{
-				max = count;
+				max = count_total;
 			}
 
 			my_author_name = null;
@@ -69,6 +57,16 @@ public class sample
 		inp_author_name = null;
 		iter = null;
 
-		return max;
+		try
+		{
+			//relevance = max;
+			return max;
+		}
+
+		finally
+		{
+			count_total = null;
+			max = null;
+		}
 	}
 }

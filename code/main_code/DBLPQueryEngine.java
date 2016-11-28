@@ -15,7 +15,7 @@ public class DBLPQueryEngine
 	{
 		new DBLPQueryEngine();
 		author_for_entity_resolution = new StringBuilder();
-		author_for_entity_resolution.append("oded");
+		author_for_entity_resolution.append("saxena");
 		my_data_processor.performEntityResolution( author_for_entity_resolution );
 		//title_tags_list = new HashSet<StringBuilder>();
 		//title_tags_list.add( new StringBuilder("trees") );

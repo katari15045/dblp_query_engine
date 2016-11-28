@@ -1,15 +1,15 @@
 import java.util.*;
 
-public class Publication implements Cloneable							
+public class Publication							
 {
 
 	protected List<StringBuilder> author_array;
 	private StringBuilder title,pages,year,volume,journal,number,url,ee;
-	private int relevance;
+	private static int relevance;
 
 	public Publication()
 	{
-		author_array = new LinkedList<StringBuilder>();
+		author_array = new ArrayList<StringBuilder>();
 		title = new StringBuilder();
 		pages = new StringBuilder();
 		year = new StringBuilder();
@@ -29,27 +29,19 @@ public class Publication implements Cloneable
 							getTitle(),getPages(),getYear(),getVolume(),getJournal(),getNumber(),getURL(),getEE() );
 	}
 
-	public Publication clone()
+	public Publication myClone()
 	{
-		Publication to_return = null;
+		Publication to_return = new Publication();
 
-		try
-		{
-			to_return = (Publication) super.clone();	// Shallow Copying
-			to_return.author_array = new LinkedList<StringBuilder>(author_array);	// Deep Copying
-			to_return.title = new StringBuilder(title);
-			to_return.pages = new StringBuilder(pages);
-			to_return.year = new StringBuilder(year);
-			to_return.volume = new StringBuilder(volume);
-			to_return.journal = new StringBuilder(journal);
-			to_return.number = new StringBuilder(number);
-			to_return.url = new StringBuilder(url);
-			to_return.ee = new StringBuilder(ee);
-		}
-		catch(CloneNotSupportedException e)
-		{
-			System.out.println(e);
-		}
+		to_return.author_array = new LinkedList<StringBuilder>(author_array);	// Deep Copying
+		to_return.title = new StringBuilder(title);
+		to_return.pages = new StringBuilder(pages);
+		to_return.year = new StringBuilder(year);
+		to_return.volume = new StringBuilder(volume);
+		to_return.journal = new StringBuilder(journal);
+		to_return.number = new StringBuilder(number);
+		to_return.url = new StringBuilder(url);
+		to_return.ee = new StringBuilder(ee);
 
 		return to_return;
 	}
@@ -140,14 +132,13 @@ public class Publication implements Cloneable
 
 	public int doesAuthorExist(String inp_author_name)
 	{
-		int count = 0;
-		int max = -2;
+		Integer count_total = 0,max = -2;
 		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{
 			String my_author_name = iter.next().toString();		// Authors in this Publication
-			count = 0;
+			count_total = 0;
 
 			for( String first_string: inp_author_name.split(" ") )
 			{
@@ -155,19 +146,9 @@ public class Publication implements Cloneable
 				{
 					if( first_string.equalsIgnoreCase(second_string) )
 					{
-						count = count + 1;
-					}
+						count_total = count_total + 1;
 
-					if( first_string.length() == 1 || second_string.length() == 1 || first_string.length() == 2 || second_string.length() == 2 )
-					{
-						Integer difference = first_string.charAt(0) - second_string.charAt(0);
-
-						if( difference == 32 || difference == -32 || difference == 0 )
-						{
-							count = count + 1;
-						}
-
-						difference = null;
+						//System.out.println(first_string + "----" + second_string);
 					}
 
 					second_string = null;
@@ -176,9 +157,9 @@ public class Publication implements Cloneable
 				first_string = null;
 			}
 
-			if( count > max )
+			if( count_total > max )
 			{
-				max = count;
+				max = count_total;
 			}
 
 			my_author_name = null;
@@ -187,8 +168,17 @@ public class Publication implements Cloneable
 		inp_author_name = null;
 		iter = null;
 
-		relevance = max;
-		return max;
+		try
+		{
+			relevance = max;
+			return max;
+		}
+
+		finally
+		{
+			count_total = null;
+			max = null;
+		}
 	}
 
 

@@ -3,7 +3,7 @@ import java.util.*;
 
 public class DataBase
 {
-	protected static List<Publication> publication_list;
+	private static List<Publication> publication_list;
 	static DataParser my_data_parser;
 	static boolean store_for_authors;
 	static StringBuilder author_name;
@@ -22,7 +22,8 @@ public class DataBase
 	{
 		if( decideToStore(inp_publication) )
 		{
-			publication_list.add( inp_publication.clone() );
+			publication_list.add( inp_publication.myClone() );
+			//inp_publication.printAuthorList();
 		}
 
 		inp_publication = null;	
@@ -32,10 +33,14 @@ public class DataBase
 	{
 		if(store_for_authors)
 		{
-			if( inp_publication.doesAuthorExist( author_name.toString() ) > 0 )
+			Integer max = inp_publication.doesAuthorExist( author_name.toString() );
+
+			if(  max > 0 )
 			{
 				return true;
 			}
+
+			max = null;
 		}
 
 		else if(store_for_title_tags)
