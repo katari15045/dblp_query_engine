@@ -25,6 +25,7 @@ public class DataBase
 	private static StringBuilder author_name_predictor_4;
 	private static StringBuilder author_name_predictor_5;
 	private static StringBuilder year_for_query_3;
+	private static Integer q_3_min_1,q_3_min_2,q_3_min_3,q_3_min_4,q_3_min_5;
 
 	public static void initializeObjects()
 	{
@@ -46,6 +47,12 @@ public class DataBase
 
 		my_data_parser = new DataParser();
 		author_name_entity_res = new StringBuilder();
+
+		q_3_min_1 = 3000;
+		q_3_min_2 = 3000;
+		q_3_min_3 = 3000;
+		q_3_min_4 = 3000;
+		q_3_min_5 = 3000;
 	}
 
 	public static void storePublication(Publication inp_publication)
@@ -94,6 +101,7 @@ public class DataBase
 				StringBuilder sb_year = new StringBuilder();
 				sb_author.append( iter.next() );
 				sb_year.append( inp_publication.getYear().toString() );
+				Integer temp_int = Integer.parseInt( sb_year.toString() );
 
 
 				if( year_for_query_3.toString().compareTo( sb_year.toString() ) < 0 )
@@ -112,6 +120,11 @@ public class DataBase
 					{
 						year_hash_map_1.put( sb_year.toString(), 1 );
 					}
+
+					if( temp_int < q_3_min_1 )
+					{
+						q_3_min_1 = temp_int;
+					}
 				}
 
 				if( sb_author.toString().equalsIgnoreCase( author_name_predictor_2.toString() ) )
@@ -124,6 +137,11 @@ public class DataBase
 					else
 					{
 						year_hash_map_2.put( sb_year.toString(), 1 );
+					}
+
+					if( temp_int < q_3_min_2 )
+					{
+						q_3_min_2 = temp_int;
 					}
 				}
 
@@ -138,6 +156,11 @@ public class DataBase
 					{
 						year_hash_map_3.put( sb_year.toString(), 1 );
 					}
+
+					if( temp_int < q_3_min_3 )
+					{
+						q_3_min_3 = temp_int;
+					}
 				}
 
 				if( sb_author.toString().equalsIgnoreCase( author_name_predictor_4.toString() ) )
@@ -150,6 +173,11 @@ public class DataBase
 					else
 					{
 						year_hash_map_4.put( sb_year.toString(), 1 );
+					}
+
+					if( temp_int < q_3_min_4 )
+					{
+						q_3_min_4 = temp_int;
 					}
 				}
 
@@ -165,10 +193,16 @@ public class DataBase
 					{
 						year_hash_map_5.put( sb_year.toString(), 1 );
 					}
+
+					if( temp_int < q_3_min_5 )
+					{
+						q_3_min_5 = temp_int;
+					}
 				}
 
-
-
+				sb_author = null;
+				sb_year = null;	
+				temp_int = null;
 			}
 		}
 
@@ -302,7 +336,7 @@ public class DataBase
 		author_name_predictor_3 = null;
 		author_name_predictor_4 = null;
 		author_name_predictor_5 = null;
-		year_for_query_3 = null;
+		inp_year = null;
 	}
 
 	public static List<Publication> getPublicationList()
@@ -338,6 +372,36 @@ public class DataBase
 	public static HashMap<String,Integer> getYearHashMap5()
 	{
 		return year_hash_map_5;
+	}
+
+	public static StringBuilder getYearForPredictor()
+	{
+		return year_for_query_3;
+	}
+
+	public static Integer getMinYear1ForPredictor()
+	{
+		return q_3_min_1;
+	}
+
+	public static Integer getMinYear2ForPredictor()
+	{
+		return q_3_min_2;
+	}
+
+	public static Integer getMinYear3ForPredictor()
+	{
+		return q_3_min_3;
+	}
+
+	public static Integer getMinYear4ForPredictor()
+	{
+		return q_3_min_4;
+	}
+
+	public static Integer getMinYear5ForPredictor()
+	{
+		return q_3_min_5;
 	}
 
 }

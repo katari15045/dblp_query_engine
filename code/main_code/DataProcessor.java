@@ -4,11 +4,13 @@ public class DataProcessor
 {
 
 	Integer result_count;
+	Predictor my_predictor;
 
 	public DataProcessor()
 	{
 		DataBase.initializeObjects();
 		result_count = 0;
+		my_predictor = new Predictor();
 	}
 
 	public void performEntityResolution(StringBuilder inp_author)
@@ -46,6 +48,12 @@ public class DataProcessor
 
 		my_hash_map = null;
 		k = null;
+	}
+
+	public void predictPublications(StringBuilder sb_1, StringBuilder sb_2, StringBuilder sb_3, StringBuilder sb_4, StringBuilder sb_5, StringBuilder sb_year)
+	{
+		DataBase.storeHashMapsForPrediction(sb_1,sb_2,sb_3,sb_4,sb_5,sb_year);
+		my_predictor.predictPublications();
 	}
 
 	public void sortByDate()
@@ -189,91 +197,5 @@ public class DataProcessor
 		input_year_1 = null;
 		input_year_2 = null;
 	}
-
-
-	public void printYearHashMap()
-	{
-		HashMap<String,Integer> hm_1 = DataBase.getYearHashMap1();
-		HashMap<String,Integer> hm_2 = DataBase.getYearHashMap2();
-		HashMap<String,Integer> hm_3 = DataBase.getYearHashMap3();
-		HashMap<String,Integer> hm_4 = DataBase.getYearHashMap4();
-		HashMap<String,Integer> hm_5 = DataBase.getYearHashMap5();
-		result_count = 0;
-
-		for( String my_key: hm_1.keySet() )
-		{
-			Integer my_count = hm_1.get(my_key);
-			System.out.println(my_key + "---" + my_count);
-			result_count = result_count + 1;
-			my_count = null;
-			my_key = null;
-		}
-
-		System.out.println("Result Count : " + result_count);
-		System.out.printf("\n----------------------------------------------------\n");
-
-		result_count = 0;
-
-		for( String my_key: hm_2.keySet() )
-		{
-			Integer my_count = hm_2.get(my_key);
-			System.out.println(my_key + "---" + my_count);
-			result_count = result_count + 1;
-			my_count = null;
-			my_key = null;
-		}
-
-		System.out.println("Result Count : " + result_count);
-		System.out.printf("\n----------------------------------------------------\n");
-
-		result_count = 0;
-
-		for( String my_key: hm_3.keySet() )
-		{
-			Integer my_count = hm_3.get(my_key);
-			System.out.println(my_key + "---" + my_count);
-			result_count = result_count + 1;
-			my_count = null;
-			my_key = null;
-		}
-
-		System.out.println("Result Count : " + result_count);
-		System.out.printf("\n----------------------------------------------------\n");
-
-		result_count = 0;
-
-		for( String my_key: hm_4.keySet() )
-		{
-			Integer my_count = hm_4.get(my_key);
-			System.out.println(my_key + "---" + my_count);
-			result_count = result_count + 1;
-			my_count = null;
-			my_key = null;
-		}
-
-		System.out.println("Result Count : " + result_count);
-		System.out.printf("\n----------------------------------------------------\n");
-
-		for( String my_key: hm_5.keySet() )
-		{
-			Integer my_count = hm_5.get(my_key);
-			System.out.println(my_key + "---" + my_count);
-			result_count = result_count + 1;
-			my_count = null;
-			my_key = null;
-		}
-
-		System.out.println("Result Count : " + result_count);
-		System.out.printf("\n----------------------------------------------------\n");
-
-		hm_1 = null;
-		hm_2 = null;
-		hm_3 = null;
-		hm_4 = null;
-		hm_5 = null;
-
-
-	}
-	
 
 }

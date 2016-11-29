@@ -35,7 +35,7 @@ public class DBLPQueryEngine
 		sb_02.append("Oded Shmueli");
 		sb_03.append("Norbert Blum");
 		sb_04.append("Juha Honkala");
-		DataBase.storeHashMapsForPrediction(sb_00,sb_01,sb_02,sb_03,sb_04,sb_3);
+		my_data_processor.predictPublications(sb_00,sb_01,sb_02,sb_03,sb_04,sb_3);
 
 		//StringBuilder sb = new StringBuilder();
 		//StringBuilder sb_2 = new StringBuilder();
@@ -46,7 +46,6 @@ public class DBLPQueryEngine
 		//my_data_processor.sortByRelevance();
 
 		//my_data_processor.printPublicationList();
-		my_data_processor.printYearHashMap();
 	}
 
 }
