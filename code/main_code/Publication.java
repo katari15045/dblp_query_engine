@@ -279,4 +279,5 @@ public class Publication
 	public StringBuilder getURL()		{	return url;		}
 	public StringBuilder getEE()		{	return ee;		}
 	public int 		getRelevance()	{	return relevance;	}
+	public List<StringBuilder> getAuthorArray()	{	return author_array;	}
 }

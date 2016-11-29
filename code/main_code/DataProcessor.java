@@ -3,9 +3,12 @@ import java.util.*;
 public class DataProcessor
 {
 
+	Integer result_count;
+
 	public DataProcessor()
 	{
 		DataBase.initializeObjects();
+		result_count = 0;
 	}
 
 	public void performEntityResolution(StringBuilder inp_author)
@@ -18,6 +21,31 @@ public class DataProcessor
 	{
 		DataBase.storePublicationsBasedOnTitleTags(inp_title_tags_list_sb);
 		inp_title_tags_list_sb = null;
+	}
+
+	public void getAuthorsWithMoreThanKPublications(Integer k)
+	{
+		DataBase.storeAuthorsWithMoreThanKPublications(k);
+		HashMap<String,Integer> my_hash_map = DataBase.getAuthorHashMap();
+
+		for( String my_key: my_hash_map.keySet() )
+		{
+			Integer my_count = my_hash_map.get(my_key);
+
+			if( my_count > k )
+			{
+				System.out.println(my_key + "---" + my_count);
+				result_count = result_count + 1;
+			}
+
+			my_count = null;
+			my_key = null;
+		}
+
+		System.out.println("Result Count : " + result_count);
+
+		my_hash_map = null;
+		k = null;
 	}
 
 	public void sortByDate()

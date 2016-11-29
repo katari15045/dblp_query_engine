@@ -14,7 +14,7 @@ public class DataParser extends DefaultHandler
 	static Publication my_publication;
 	static DataBase my_data_base;
 	
-	static boolean b_article,b_author,b_title,b_pages,b_year,b_volume,b_journal,b_number,b_url,b_ee;	// By Default Boolean variable is false
+	static boolean b_article,b_author,b_title,b_pages,b_year,b_volume,b_journal,b_number,b_url,b_ee,b_www;	// By Default Boolean variable is false
 	static int count_entities=0;
 
 	public DataParser()
@@ -74,6 +74,7 @@ public class DataParser extends DefaultHandler
 		else if(q_name.equalsIgnoreCase("url"))		b_url = true;
 		else if(q_name.equalsIgnoreCase("ee"))		b_ee = true;
 		else if(q_name.equalsIgnoreCase("article"))	b_article = true;
+		else if(q_name.equalsIgnoreCase("www")) 	b_www = true;
 		
 		uri = null;
 		local_name = null;
@@ -83,6 +84,7 @@ public class DataParser extends DefaultHandler
 
 	public void characters(char ch[],int start,int length) throws SAXException
 	{
+
 		if(b_author)		{	b_author = false;	my_publication.setAuthor( getCharArray(ch,start,length) );	}
 		else if(b_title)	{	b_title = false;	my_publication.setTitle( getCharArray(ch,start,length) );	}
 		else if(b_pages)	{	b_pages = false;	my_publication.setPages( getCharArray(ch,start,length) );	}
@@ -101,14 +103,25 @@ public class DataParser extends DefaultHandler
     {
         if( qName.equalsIgnoreCase("article") )
         {
-        	my_data_base.storePublication(my_publication);
+        	if(!b_www)
+        	{
+        		my_data_base.storePublication(my_publication);
+        	}
+
+        	if( b_www )
+	        {
+	        	b_www = false;
+	        }
+
         	my_publication.clearAuthorList();
 			count_entities = count_entities + 1;
         }
 
+        
         uri = null;
         localName = null;
         qName = null;
+
     }
 
 	public void endDocument() throws SAXException

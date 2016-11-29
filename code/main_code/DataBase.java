@@ -3,35 +3,70 @@ import java.util.*;
 
 public class DataBase
 {
+	private static boolean store_for_entity_resolution;
+	private static boolean store_for_title_tags;
+	private static boolean store_for_k_authors;
+
 	private static List<Publication> publication_list;
-	static DataParser my_data_parser;
-	static boolean store_for_authors;
-	static StringBuilder author_name;
-	static boolean store_for_title_tags;
-	static Set<StringBuilder> title_tags_list;
+	private static Set<StringBuilder> title_tags_list;
+	private static HashMap<String,Integer> author_hash_map;
+
+	private static DataParser my_data_parser;
+	private static StringBuilder author_name;
 
 	public static void initializeObjects()
 	{
 		publication_list = new ArrayList<Publication>();
+		title_tags_list = new HashSet<StringBuilder>();
+		author_hash_map = new HashMap<String,Integer>();
+
 		my_data_parser = new DataParser();
 		author_name = new StringBuilder();
-		title_tags_list = new HashSet<StringBuilder>();
 	}
 
 	public static void storePublication(Publication inp_publication)
 	{
-		if( decideToStore(inp_publication) )
+
+		if(store_for_entity_resolution || store_for_title_tags)
 		{
-			publication_list.add( inp_publication.myClone() );
-			//inp_publication.printAuthorList();
+			if( decideToStorePublication(inp_publication) )
+			{
+				publication_list.add( inp_publication.myClone() );
+				//inp_publication.printAuthorList();
+			}
+		}
+
+		else if(store_for_k_authors)
+		{
+			Iterator<StringBuilder> iter = inp_publication.getAuthorArray().iterator();
+
+			while( iter.hasNext() )
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.append( iter.next().toString() );
+
+				if( author_hash_map.containsKey( sb.toString() ) )
+				{
+					author_hash_map.put( sb.toString() , author_hash_map.get( sb.toString() )+1 );
+					sb = null;
+				}
+
+				else
+				{
+					author_hash_map.put( sb.toString() , 1);
+				}
+
+			}
+
+			iter = null;
 		}
 
 		inp_publication = null;	
 	}
 
-	public static boolean decideToStore(Publication inp_publication)
+	public static boolean decideToStorePublication(Publication inp_publication)
 	{
-		if(store_for_authors)
+		if(store_for_entity_resolution)
 		{
 			Integer max = inp_publication.doesAuthorExist( author_name.toString() );
 
@@ -57,8 +92,9 @@ public class DataBase
 	// For Entity Resolution
 	public static void storePublicationsForEntityResolution(StringBuilder inp_author_sb)	
 	{	
-		store_for_authors = true;
+		store_for_entity_resolution = true;
 		store_for_title_tags = false;
+		store_for_k_authors = false;
 		publication_list.clear();
 
 		String inp_author = inp_author_sb.toString();
@@ -82,7 +118,8 @@ public class DataBase
 	public static void storePublicationsBasedOnTitleTags(Set<StringBuilder> inp_title_tags_list)
 	{
 		store_for_title_tags = true;
-		store_for_authors = false;
+		store_for_entity_resolution = false;
+		store_for_k_authors = false;
 
 		title_tags_list.clear();
 		publication_list.clear();
@@ -111,10 +148,27 @@ public class DataBase
 		inp_title_tags_list.clear();
 	}
 
+	public static void storeAuthorsWithMoreThanKPublications(Integer k)
+	{
+		store_for_k_authors = true;
+		store_for_entity_resolution = false;
+		store_for_title_tags = false;
+
+		author_hash_map.clear();
+
+		my_data_parser.startParsing();
+
+		k= null;
+	}
+
 	public static List<Publication> getPublicationList()
 	{
 		return publication_list;
 	}
 
+	public static HashMap<String,Integer> getAuthorHashMap()
+	{
+		return author_hash_map;
+	}
 
 }
