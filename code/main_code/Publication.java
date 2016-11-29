@@ -191,13 +191,13 @@ public class Publication
 
 	public int doesAuthorExist(String inp_author_name)
 	{
-		Integer count_total = 0,max = -2;
+		int count_total = 0;
+		int count_word = 0;
 		Iterator<StringBuilder> iter = author_array.iterator();
 
 		while( iter.hasNext() )
 		{
 			String my_author_name = iter.next().toString();		// Authors in this Publication
-			count_total = 0;
 
 			for( String first_string: inp_author_name.split(" ") )
 			{
@@ -206,8 +206,31 @@ public class Publication
 					if( first_string.equalsIgnoreCase(second_string) )
 					{
 						count_total = count_total + 1;
+						count_word = count_word + 1;
+					}
 
-						//System.out.println(first_string + "----" + second_string);
+					if( first_string.length() == 1 || second_string.length() == 1 || first_string.length() == 2 || second_string.length() == 2  )
+					{
+						Integer difference = first_string.charAt(0) - second_string.charAt(0);
+
+						if( difference == 32 || difference == -32 || difference == 0 )
+						{
+							Integer status_store = 1;
+
+							if( (first_string.length() == 2 && first_string.charAt(1) != '.') || (second_string.length() == 2 && second_string.charAt(1) != '.') )
+							{
+								status_store = 0;
+							}
+
+							if( status_store == 1 )
+							{
+								count_total = count_total + 1;
+							}
+
+							status_store = null;
+						}
+
+						difference = null;
 					}
 
 					second_string = null;
@@ -216,28 +239,14 @@ public class Publication
 				first_string = null;
 			}
 
-			if( count_total > max )
-			{
-				max = count_total;
-			}
-
 			my_author_name = null;
 		}
 
+		relevance = count_total;
 		inp_author_name = null;
 		iter = null;
 
-		try
-		{
-			relevance = max;
-			return max;
-		}
-
-		finally
-		{
-			count_total = null;
-			max = null;
-		}
+		return count_word;
 	}
 
 

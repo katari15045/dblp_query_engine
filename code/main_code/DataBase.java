@@ -32,7 +32,6 @@ public class DataBase
 			if( decideToStorePublication(inp_publication) )
 			{
 				publication_list.add( inp_publication.myClone() );
-				//inp_publication.printAuthorList();
 			}
 		}
 

@@ -116,6 +116,13 @@ public class DataProcessor
 		{
 			count = count + 1;
 			Publication temp_pub = iter.next();
+
+			if( temp_pub.getAuthorArray().size() > 99 )
+			{
+				temp_pub = null;
+				continue;
+			}
+
 			System.out.println( temp_pub );
 
 			temp_pub = null;

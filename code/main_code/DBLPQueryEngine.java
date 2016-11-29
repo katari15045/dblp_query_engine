@@ -14,14 +14,14 @@ public class DBLPQueryEngine
 	public static void main(String[] args)
 	{
 		new DBLPQueryEngine();
-		//author_for_entity_resolution = new StringBuilder();
-		//author_for_entity_resolution.append("Oded Shmueli");
-		//my_data_processor.performEntityResolution( author_for_entity_resolution );
+		author_for_entity_resolution = new StringBuilder();
+		author_for_entity_resolution.append("Oded Shmueli");
+		my_data_processor.performEntityResolution( author_for_entity_resolution );
 		//title_tags_list = new HashSet<StringBuilder>();
 		//title_tags_list.add( new StringBuilder("trees") );
 		//title_tags_list.add( new StringBuilder("Nets") );
 		//my_data_processor.findPublicationsByTitleTags(title_tags_list);
-		my_data_processor.getAuthorsWithMoreThanKPublications(300);
+		//my_data_processor.getAuthorsWithMoreThanKPublications(300);
 
 		//StringBuilder sb = new StringBuilder();
 		//StringBuilder sb_2 = new StringBuilder();
@@ -29,9 +29,9 @@ public class DBLPQueryEngine
 		//sb.append("2015");
 		//my_data_processor.getPublicationListBetweenTwoYears(sb,sb_2);
 		//my_data_processor.sortByDate();
-		//my_data_processor.sortByRelevance();
+		my_data_processor.sortByRelevance();
 
-		//my_data_processor.printPublicationList();
+		my_data_processor.printPublicationList();
 	}
 
 }
