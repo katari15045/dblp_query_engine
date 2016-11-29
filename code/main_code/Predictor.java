@@ -17,6 +17,12 @@ public class Predictor
 	Integer min_year_4;
 	Integer min_year_5;
 
+	Integer result_1;
+	Integer result_2;
+	Integer result_3;
+	Integer result_4;
+	Integer result_5;
+
 	private void initializeObjects()
 	{
 		hash_map_1 = DataBase.getYearHashMap1();
@@ -40,7 +46,41 @@ public class Predictor
 	{
 		initializeObjects();
 		fillYearsInHashMap();
+		Integer numerator;
+		Integer denominator;
+
+		numerator = getNumerator(hash_map_1,min_year_1);
+		denominator = getDenominator( hash_map_1.size() );
+		result_1 = numerator / denominator;
+
+		numerator = getNumerator(hash_map_2,min_year_2);
+		denominator = getDenominator( hash_map_2.size() );
+		result_2 = numerator / denominator;
+
+		numerator = getNumerator(hash_map_3,min_year_3);
+		denominator = getDenominator( hash_map_3.size() );
+		result_3 = numerator / denominator;
+
+		numerator = getNumerator(hash_map_4,min_year_4);
+		denominator = getDenominator( hash_map_4.size() );
+		result_4 = numerator / denominator;
+
+		numerator = getNumerator(hash_map_5,min_year_5);
+		denominator = getDenominator( hash_map_5.size() );
+		result_5 = numerator / denominator;
+
 		printYearHashMap();
+
+		System.out.println("--------------------------------------------");
+
+		System.out.println("Result 1 : " + result_1);
+		System.out.println("Result 2 : " + result_2);
+		System.out.println("Result 3 : " + result_3);
+		System.out.println("Result 4 : " + result_4);
+		System.out.println("Result 5 : " + result_5);
+
+		numerator = null;
+		denominator = null;
 	}
 
 	private void fillYearsInHashMap()
@@ -51,7 +91,7 @@ public class Predictor
 		Integer count_4 = min_year_4;
 		Integer count_5 = min_year_5;
 
-		Integer year_int = Integer.parseInt( year.toString() );
+		Integer year_int = getIntYear();
 
 		System.out.println("Count 1 : " + count_1 + "   Year_int : " + year_int);
 
@@ -118,16 +158,20 @@ public class Predictor
 	}
 
 
-	public Integer getNumerator(List<Integer> inp_list)
+	public Integer getNumerator(HashMap<String,Integer> inp_hash_map,Integer inp_min)
 	{
-		Iterator<Integer> iter = inp_list.iterator();
-		Integer count = 1;
+		Integer int_year = getIntYear();
+		Integer count_1 = inp_min;
+		Integer count_int = 1;
 		Integer to_return = 0;
 
-		while( iter.hasNext() )
+		while( count_1 <= int_year )
 		{
-			to_return = to_return + ( iter.next() * count );
-			count = count + 1;
+			String temp_str = Integer.toString(count_1);
+			to_return = to_return + ( count_int * inp_hash_map.get(temp_str) );
+
+			count_1 = count_1 + 1;
+			count_int = count_int + 1;
 		}
 
 		try
@@ -137,13 +181,15 @@ public class Predictor
 
 		finally
 		{
-			iter = null;
-			to_return = null;
-			count = null;
+			int_year = null;
+			count_1 = null;
+			count_int = null;
+			inp_hash_map = null;
+			inp_min = null;
 		}
-
 	}
 
+	
 
 	public Integer getDenominator(Integer inp_length)
 	{
@@ -240,7 +286,10 @@ public class Predictor
 
 	}
 	
-
+	private Integer getIntYear()
+	{
+		return Integer.parseInt( year.toString() );
+	}
 
 }	
 	
