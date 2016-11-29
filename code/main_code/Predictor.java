@@ -4,24 +4,24 @@ import java.util.*;
 public class Predictor
 {
 
-	HashMap<String,Integer> hash_map_1;
-	HashMap<String,Integer> hash_map_2;
-	HashMap<String,Integer> hash_map_3;
-	HashMap<String,Integer> hash_map_4;
-	HashMap<String,Integer> hash_map_5;
-	StringBuilder year;
+	private HashMap<String,Integer> hash_map_1;
+	private HashMap<String,Integer> hash_map_2;
+	private HashMap<String,Integer> hash_map_3;
+	private HashMap<String,Integer> hash_map_4;
+	private HashMap<String,Integer> hash_map_5;
+	private StringBuilder year;
 
-	Integer min_year_1;
-	Integer min_year_2;
-	Integer min_year_3;
-	Integer min_year_4;
-	Integer min_year_5;
+	private Integer min_year_1;
+	private Integer min_year_2;
+	private Integer min_year_3;
+	private Integer min_year_4;
+	private Integer min_year_5;
 
-	Integer result_1;
-	Integer result_2;
-	Integer result_3;
-	Integer result_4;
-	Integer result_5;
+	private Integer result_1;
+	private Integer result_2;
+	private Integer result_3;
+	private Integer result_4;
+	private Integer result_5;
 
 	private void initializeObjects()
 	{
@@ -289,6 +289,31 @@ public class Predictor
 	private Integer getIntYear()
 	{
 		return Integer.parseInt( year.toString() );
+	}
+
+	public Integer getResult1()
+	{
+		return result_1;
+	}
+
+	public Integer getResult2()
+	{
+		return result_2;
+	}
+
+	public Integer getResult3()
+	{
+		return result_3;
+	}
+
+	public Integer getResult4()
+	{
+		return result_4;
+	}
+
+	public Intger getResult5()
+	{
+		return result_5;
 	}
 
 }	
