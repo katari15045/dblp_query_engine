@@ -1,5 +1,4 @@
 Exception
-GUI
 DataParser
 DataBase
 Publication
